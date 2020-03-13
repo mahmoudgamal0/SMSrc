@@ -14,10 +14,8 @@ public class SigninPresenter {
     public boolean signUpUser(String username,
                               String password,
                               String confirmPassword,
-                              UserRepository userRepository ) {
-
-        Authenticate authenticate = new Authenticate(userRepository);
-
+                              UserRepository userRepository,
+                              Authenticate authenticate) {
 
         if(userRepository.getUserByUsername(username).size() != 0) {
             throw new RuntimeException("Username already exists");

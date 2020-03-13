@@ -29,11 +29,14 @@ public class SignUpandInTest {
 
     @Mock
     private UserRepository repository;
+
+    @Mock
+    private Authenticate authenticate;
+
     private ArrayList<User> correctUserList;
     private User user;
     private LoginPresenter loginPresenter;
     private SigninPresenter signUpPresenter;
-
     @Before
     public void beforeTestRun() {
         String encryptedPass = Crypto.encrypt("123456");
@@ -42,6 +45,7 @@ public class SignUpandInTest {
         correctUserList.add(user);
         loginPresenter = new LoginPresenter();
         signUpPresenter = new SigninPresenter();
+
     }
 
     @Test
@@ -64,15 +68,15 @@ public class SignUpandInTest {
 
     @Test
     public void testSuccessfulSignUp() {
-        repository.nukeTable();
-        when(
+        when(authenticate.authenticate(user.getUsername(),"123456")).thenReturn(true);
         try {
             assertTrue(
                     signUpPresenter.signUpUser(
                     user.getUsername(),
                     "123456",
                     "123456",
-                    repository));
+                    repository,
+                    authenticate));
         } catch (Exception e) {
 
             Assert.fail(e.getMessage());
@@ -88,7 +92,8 @@ public class SignUpandInTest {
             signUpPresenter.signUpUser("test",
                     "456",
                     "123",
-                    repository);
+                    repository,
+                    new Authenticate(repository));
             Assert.fail();
 
         } catch (Exception e) {
@@ -105,7 +110,8 @@ public class SignUpandInTest {
                     user.getUsername(),
                     "456",
                     "456",
-                    repository);
+                    repository,
+                    new Authenticate(repository));
             Assert.fail();
 
         } catch (Exception e) {
