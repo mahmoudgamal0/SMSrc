@@ -46,7 +46,9 @@ public class LoginFragment extends Fragment {
             try {
                 if(presenter.loginUser(
                         usernameBox.getText().toString(),
-                        passwordBox.getText().toString())) {
+                        passwordBox.getText().toString(),
+                        getContext()
+                )) {
                     navController.navigate(R.id.action_loginFragment_to_usersListFragment);
                 }
             } catch (Exception e) {
