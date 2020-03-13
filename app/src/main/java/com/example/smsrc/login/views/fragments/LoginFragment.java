@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 
 import com.example.smsrc.R;
 import com.example.smsrc.login.presenter.LoginPresenter;
+import com.example.smsrc.users.dals.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -47,7 +48,7 @@ public class LoginFragment extends Fragment {
                 if(presenter.loginUser(
                         usernameBox.getText().toString(),
                         passwordBox.getText().toString(),
-                        getContext()
+                        UserRepository.getUserRepository(getContext())
                 )) {
                     navController.navigate(R.id.action_loginFragment_to_usersListFragment);
                 }

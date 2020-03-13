@@ -10,7 +10,16 @@ import androidx.room.Room;
 public class UserRepository {
     private DBRunner dbRunner;
 
-    public UserRepository(Context context) {
+    private static UserRepository userRepository;
+
+    public static UserRepository getUserRepository(Context context) {
+        if(userRepository == null) {
+            userRepository = new UserRepository(context);
+        }
+        return userRepository;
+    }
+
+    private UserRepository(Context context) {
         String DB_NAME = "SMSrc.db";
         dbRunner = Room.databaseBuilder(context, DBRunner.class, DB_NAME).build();
     }
