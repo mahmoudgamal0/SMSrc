@@ -3,6 +3,7 @@ package com.example.smsrc.login.presenter;
 import android.content.Context;
 
 import com.example.smsrc.permissions.models.Authenticate;
+import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 
 public class LoginPresenter {
@@ -13,7 +14,7 @@ public class LoginPresenter {
         Authenticate authenticate = new Authenticate(userRepository);
 
         try {
-            authenticate.authenticate(username, password);
+            authenticate.authenticate(username, Crypto.encrypt(password));
         } catch (Exception e) {
             return false;
         }

@@ -3,6 +3,7 @@ package com.example.smsrc.signin.presenter;
 import android.content.Context;
 
 import com.example.smsrc.permissions.models.Authenticate;
+import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 
 
@@ -21,9 +22,10 @@ public class SigninPresenter {
         } else if (!password.equals(confirmPassword)) {
             return false;
         } else {
-            //TODO
+            //TODO roll
             try {
-                userRepository.insert(username, password, null);
+                userRepository.insert(username, Crypto.encrypt(password) , null);
+                authenticate.authenticate(username, password);
             } catch (Exception e) {
                 return false;
             }
