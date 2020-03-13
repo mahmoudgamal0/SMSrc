@@ -10,7 +10,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.smsrc.R;
+import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.signin.presenter.SigninPresenter;
+import com.example.smsrc.users.dals.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
 
@@ -45,12 +47,14 @@ public class SigninFragment extends Fragment {
                 if(presenter.signUpUser(
                         usernameBox.getText().toString(),
                         passwordBox.getText().toString(),
-                        confirmPasswordBox.getText().toString()
+                        confirmPasswordBox.getText().toString(),
+                        UserRepository.getUserRepository(getContext()),
+                        new Authenticate(UserRepository.getUserRepository(getContext()))
                 )) {
                     navController.navigate(R.id.action_signinFragment_to_usersListFragment);
                 }
             } catch (Exception e) {
-                //TODO
+                    e.printStackTrace();
             }
         });
     }

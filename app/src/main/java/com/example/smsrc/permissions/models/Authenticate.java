@@ -14,7 +14,7 @@ public class Authenticate {
         this.userRepository = userRepository;
     }
 
-    public void authenticate(String username, String passcode){
+    public boolean authenticate(String username, String passcode){
         List<User> users = userRepository.getUserByUsername(username);
 
         if(users.size() == 0)
@@ -24,5 +24,6 @@ public class Authenticate {
 
         if(!user.getPasscode().equals(Crypto.encrypt(passcode)))
             throw new RuntimeException("Invalid Credentials");
+        return true;
     }
 }

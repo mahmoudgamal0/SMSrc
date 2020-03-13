@@ -7,6 +7,6 @@ import com.example.smsrc.users.dals.UserRepository;
 public class UserFactory {
 
     public UserRepository getRepository(Context context){
-        return new UserRepository(context);
+        return UserRepository.getUserRepository(context);
     }
 }

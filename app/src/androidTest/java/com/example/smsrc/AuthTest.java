@@ -27,8 +27,7 @@ public class AuthTest {
 
     @Before
     public void beforeTestRun() {
-        String encryptedPass = Crypto.encrypt("123456");
-        user = new User("my name", encryptedPass, "delete");
+        user = new User("my name", "123456", "delete");
         correctUserList = new ArrayList<>();
         correctUserList.add(user);
     }
