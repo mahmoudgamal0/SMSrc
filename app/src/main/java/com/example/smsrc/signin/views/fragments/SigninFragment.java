@@ -10,11 +10,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.smsrc.R;
+import com.example.smsrc.signin.presenter.SigninPresenter;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class SigninFragment extends Fragment {
     private NavController navController;
-
+    private SigninPresenter presenter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_signin, container, false);
@@ -24,6 +26,7 @@ public class SigninFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+        presenter = new SigninPresenter();
         instantiateListeners(view);
     }
 
@@ -31,7 +34,24 @@ public class SigninFragment extends Fragment {
         Button signinToLoginBtn = view.findViewById(R.id.btn_navigate_signin);
         Button signinToUsersBtn = view.findViewById(R.id.btn_navigate_users);
 
+        TextInputEditText usernameBox = view.findViewById(R.id.username_signup);
+        TextInputEditText passwordBox = view.findViewById(R.id.password_signup);
+        TextInputEditText confirmPasswordBox = view.findViewById(R.id.confirm_password_signup);
+
         signinToLoginBtn.setOnClickListener(v -> navController.navigate(R.id.action_signinFragment_to_loginFragment));
-        signinToUsersBtn.setOnClickListener(v -> navController.navigate(R.id.action_signinFragment_to_usersListFragment));
+        signinToUsersBtn.setOnClickListener(v -> {
+
+            try {
+                if(presenter.signUpUser(
+                        usernameBox.getText().toString(),
+                        passwordBox.getText().toString(),
+                        confirmPasswordBox.getText().toString()
+                )) {
+                    navController.navigate(R.id.action_signinFragment_to_usersListFragment);
+                }
+            } catch (Exception e) {
+                //TODO
+            }
+        });
     }
 }
