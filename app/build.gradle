@@ -45,7 +45,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    // Dynamic Feature Module Support
+    // Dynamic Feature Module Support§
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
 
     // Testing Navigation
@@ -53,6 +53,6 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: '1.7.4'
-    testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
+    androidTestImplementation 'org.mockito:mockito-core:2.7.22'
+    androidTestImplementation 'org.mockito:mockito-android:2.7.22'
 }

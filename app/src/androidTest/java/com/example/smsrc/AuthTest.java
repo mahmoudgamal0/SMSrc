@@ -1,59 +1,50 @@
 package com.example.smsrc;
 
-import android.content.Context;
-import com.example.smsrc.db.DBRunner;
 import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.permissions.models.Authorize;
+import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
-
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.lang.reflect.Field;
-
-import androidx.room.Room;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
-
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import java.util.ArrayList;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.mockito.Mockito.when;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class AuthTest {
 
-    private Context appContext;
-    private DBRunner db;
+    @Mock
+    private UserRepository repository;
+    private ArrayList<User> correctUserList;
     private User user;
 
     @Before
-    public void beforeTestRun() throws NoSuchFieldException, IllegalAccessException {
-        appContext = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
-        db = Room.inMemoryDatabaseBuilder(appContext, DBRunner.class).build();
-        UserRepository repository = new UserRepository(appContext);
-
-        Field repoDb = repository.getClass().getDeclaredField("dbRunner");
-        repoDb.setAccessible(true);
-        repoDb.set(repository, db);
-
-        user = new User("my name", "123456", "delete");
-        repository.insert( user.getUsername(), user.getPasscode(), user.getAuthLevel());
+    public void beforeTestRun() {
+        String encryptedPass = Crypto.encrypt("123456");
+        user = new User("my name", encryptedPass, "delete");
+        correctUserList = new ArrayList<>();
+        correctUserList.add(user);
     }
 
     @Test
     public void testSuccessfulAuthentication() {
-        Authenticate authenticate = new Authenticate(appContext);
-        authenticate.authenticate(user.getUsername(), user.getPasscode());
+        when(repository.getUserByUsername(user.getUsername())).thenReturn(correctUserList);
+        Authenticate authenticate = new Authenticate(repository);
+        authenticate.authenticate(user.getUsername(), "123456");
     }
 
     @Test
     public void testFailedAuthenticationWrongPassword() {
         try {
-            Authenticate authenticate = new Authenticate(appContext);
+            when(repository.getUserByUsername(user.getUsername())).thenReturn(correctUserList);
+            Authenticate authenticate = new Authenticate(repository);
             authenticate.authenticate(user.getUsername(), "12345");
             Assert.fail();
         } catch (RuntimeException e) {
@@ -64,7 +55,8 @@ public class AuthTest {
     @Test
     public void testFailedAuthenticationWrongUsername() {
         try {
-            Authenticate authenticate = new Authenticate(appContext);
+            when(repository.getUserByUsername(user.getUsername())).thenReturn(new ArrayList<>());
+            Authenticate authenticate = new Authenticate(repository);
             authenticate.authenticate("my nam", user.getPasscode());
             Assert.fail();
         } catch (RuntimeException e) {
@@ -98,11 +90,6 @@ public class AuthTest {
         } catch (RuntimeException e) {
             assertEquals("Invalid Auth Role for user", e.getMessage());
         }
-    }
-
-    @After
-    public void afterTestRun() {
-        db.close();
     }
 }
 
