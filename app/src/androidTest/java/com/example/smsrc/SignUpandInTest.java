@@ -3,6 +3,7 @@ package com.example.smsrc;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.login.presenter.LoginPresenter;
 import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.permissions.models.Authorize;
@@ -33,6 +34,7 @@ public class SignUpandInTest {
     @Mock
     private Authenticate authenticate;
 
+    CacheManager cacheManager;
     private ArrayList<User> correctUserList;
     private User user;
     private LoginPresenter loginPresenter;
@@ -45,24 +47,28 @@ public class SignUpandInTest {
         correctUserList.add(user);
         loginPresenter = new LoginPresenter();
         signUpPresenter = new SigninPresenter();
-
+        cacheManager = new CacheManager(InstrumentationRegistry.getInstrumentation().getContext());
+        cacheManager.clearCache();
     }
 
     @Test
     public void testSuccessfulLogIn() {
+        assertFalse(cacheManager.isUserCached());
         when(repository.getUserByUsername(user.getUsername())).thenReturn(correctUserList);
-        boolean test = loginPresenter.loginUser(user.getUsername(), "123456", repository);
+        boolean test = loginPresenter.loginUser(user.getUsername(), "123456", repository,cacheManager);
         assertTrue(test);
+        assertTrue(cacheManager.isUserCached());
     }
 
     @Test
     public void testFailedLogInWrongPassword() {
         try {
             when(repository.getUserByUsername(user.getUsername())).thenReturn(correctUserList);
-            boolean test = loginPresenter.loginUser(user.getUsername(), user.getPasscode(), repository);
+            boolean test = loginPresenter.loginUser(user.getUsername(), user.getPasscode(), repository, cacheManager);
             Assert.fail();
         } catch (RuntimeException e) {
             assertEquals("Invalid Credentials", e.getMessage());
+            assertFalse(cacheManager.isUserCached());
         }
     }
 
@@ -70,13 +76,16 @@ public class SignUpandInTest {
     public void testSuccessfulSignUp() {
         when(authenticate.authenticate(user.getUsername(),"123456")).thenReturn(true);
         try {
+            assertFalse(cacheManager.isUserCached());
             assertTrue(
                     signUpPresenter.signUpUser(
                     user.getUsername(),
                     "123456",
                     "123456",
                     repository,
-                    authenticate));
+                    authenticate, cacheManager));
+            assertTrue(cacheManager.isUserCached());
+
         } catch (Exception e) {
 
             Assert.fail(e.getMessage());
@@ -93,7 +102,7 @@ public class SignUpandInTest {
                     "456",
                     "123",
                     repository,
-                    new Authenticate(repository));
+                    new Authenticate(repository), cacheManager);
             Assert.fail();
 
         } catch (Exception e) {
@@ -111,7 +120,7 @@ public class SignUpandInTest {
                     "456",
                     "456",
                     repository,
-                    new Authenticate(repository));
+                    new Authenticate(repository),cacheManager);
             Assert.fail();
 
         } catch (Exception e) {

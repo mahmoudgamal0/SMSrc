@@ -2,6 +2,7 @@ package com.example.smsrc.signin.presenter;
 
 import android.content.Context;
 
+import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.permissions.utils.AuthRoles;
 import com.example.smsrc.permissions.utils.Crypto;
@@ -15,7 +16,8 @@ public class SigninPresenter {
                               String password,
                               String confirmPassword,
                               UserRepository userRepository,
-                              Authenticate authenticate) {
+                              Authenticate authenticate,
+                              CacheManager manager) {
 
         if(userRepository.getUserByUsername(username).size() != 0) {
             throw new RuntimeException("Username already exists");
@@ -29,6 +31,9 @@ public class SigninPresenter {
             } catch (Exception e) {
                 throw e;
             }
+
+            manager.cacheUser(username);
+
             return true;
         }
     }
