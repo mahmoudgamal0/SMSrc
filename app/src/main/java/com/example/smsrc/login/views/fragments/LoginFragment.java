@@ -52,7 +52,7 @@ public class LoginFragment extends Fragment {
                         UserRepository.getUserRepository(getContext()),
                         new CacheManager(getContext())
                 )) {
-                    navController.navigate(R.id.action_loginFragment_to_usersListFragment);
+                    navController.navigate(R.id.action_loginFragment_to_commandFragment);
                 }
             } catch (Exception e) {
                 //TODO ALERT BOX

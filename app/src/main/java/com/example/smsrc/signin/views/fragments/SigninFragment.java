@@ -53,7 +53,7 @@ public class SigninFragment extends Fragment {
                         new Authenticate(UserRepository.getUserRepository(getContext())),
                         new CacheManager(getContext()))
                 ) {
-                    navController.navigate(R.id.action_signinFragment_to_usersListFragment);
+                    navController.navigate(R.id.action_signinFragment_to_commandFragment);
                 }
             } catch (Exception e) {
                     e.printStackTrace();
