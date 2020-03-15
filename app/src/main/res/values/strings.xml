@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">SMSrc</string>
+    <string name="open_nav">OPEN</string>
+    <string name="close_nav">CLOSE</string>
+    <string name="username">Username: </string>
+    <string name="userrole">UserRole: </string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

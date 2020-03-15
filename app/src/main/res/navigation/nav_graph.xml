@@ -18,22 +18,22 @@
         android:name="com.example.smsrc.signin.views.fragments.SigninFragment"
         android:label="SigninFragment" >
         <action
-            android:id="@+id/action_signinFragment_to_usersListFragment"
-            app:destination="@id/usersListFragment" />
-        <action
             android:id="@+id/action_signinFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signinFragment_to_commandFragment"
+            app:destination="@id/commandFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.smsrc.login.views.fragments.LoginFragment"
         android:label="LoginFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_usersListFragment"
-            app:destination="@id/usersListFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_signinFragment"
             app:destination="@id/signinFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_commandFragment"
+            app:destination="@id/commandFragment" />
     </fragment>
     <fragment
         android:id="@+id/usersListFragment"
@@ -42,9 +42,21 @@
         <action
             android:id="@+id/action_usersListFragment_to_userEditFragment"
             app:destination="@id/userEditFragment" />
+        <action
+            android:id="@+id/action_usersListFragment_to_commandFragment"
+            app:destination="@id/commandFragment" />
     </fragment>
     <fragment
         android:id="@+id/userEditFragment"
         android:name="com.example.smsrc.users.views.fragments.UserEditFragment"
         android:label="UserEditFragment" />
+    <fragment
+        android:id="@+id/commandFragment"
+        android:name="com.example.smsrc.commands.views.fragments.CommandFragment"
+        android:label="fragment_command"
+        tools:layout="@layout/fragment_command" >
+        <action
+            android:id="@+id/action_commandFragment_to_usersListFragment"
+            app:destination="@id/usersListFragment" />
+    </fragment>
 </navigation>
