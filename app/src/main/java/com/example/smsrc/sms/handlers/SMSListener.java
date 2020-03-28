@@ -4,13 +4,12 @@ import com.example.smsrc.sms.presenter.SMSPresenter;
 
 public class SMSListener {
 
-    private SMSPresenter presenter;
-    public SMSListener(SMSPresenter presenter){
-        this.presenter = presenter;
+    private SMSExecutor executor;
+    public SMSListener(SMSExecutor executor){
+        this.executor = executor;
     }
 
     public void newMessageReceived(String incomingMessage){
         // TODO parse
-        // TODO call presenter
     }
 }
