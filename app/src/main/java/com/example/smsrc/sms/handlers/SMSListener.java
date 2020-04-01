@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import com.example.smsrc.sms.model.SMS;
+import com.example.smsrc.users.dals.UserRepository;
 
 public class SMSListener extends BroadcastReceiver {
 
@@ -28,9 +29,10 @@ public class SMSListener extends BroadcastReceiver {
                     String[] msgBody = msg.getMessageBody().split("\n");
 
                     // FIXME apply another metric to discover app-specific messages
-                    if(msgBody.length == 2){
+                    if(msgBody.length == 3){
                         // Execute Message
-                        SMS sms = new SMS(msgBody[0], msgBody[1]);
+                        SMS sms = new SMS(msgBody[0], msgBody[1], msgBody[2]);
+                        this.executor.setRepository(UserRepository.getUserRepository(context));
                         sms.setDstPhoneNumber(msg_from);
                         this.executor.execute(sms);
                     }

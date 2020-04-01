@@ -1,5 +1,6 @@
 package com.example.smsrc;
 
+import com.example.smsrc.commands.model.CommandsContract;
 import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.permissions.models.Authorize;
 import com.example.smsrc.permissions.utils.Crypto;
@@ -27,7 +28,7 @@ public class AuthTest {
 
     @Before
     public void beforeTestRun() {
-        user = new User("my name", "123456", "delete");
+        user = new User("my name", Crypto.encrypt("123456"), "owner");
         correctUserList = new ArrayList<>();
         correctUserList.add(user);
     }
@@ -66,17 +67,14 @@ public class AuthTest {
     @Test
     public void testAllAuthorizationCases(){
         Authorize authorize = new Authorize();
-        User user1 = new User(user.getUsername(), user.getPasscode(), "add");
-        User user2 = new User(user.getUsername(), user.getPasscode(), "edit");
-        assertTrue(authorize.authorize(user, "delete"));
-        assertFalse(authorize.authorize(user2, "delete"));
-        assertFalse(authorize.authorize(user1, "delete"));
-        assertTrue(authorize.authorize(user, "edit"));
-        assertTrue(authorize.authorize(user2, "edit"));
-        assertFalse(authorize.authorize(user1, "edit"));
-        assertTrue(authorize.authorize(user, "add"));
-        assertTrue(authorize.authorize(user2, "add"));
-        assertTrue(authorize.authorize(user1, "add"));
+        User user1 = new User(user.getUsername(), user.getPasscode(), "level 1 guest");
+        User user2 = new User(user.getUsername(), user.getPasscode(), "level 2 guest");
+        assertTrue(authorize.authorize(user, CommandsContract.CHANGE_PIN_CODE));
+        assertFalse(authorize.authorize(user2, CommandsContract.CHANGE_PIN_CODE));
+        assertFalse(authorize.authorize(user1, CommandsContract.CHANGE_PIN_CODE));
+        assertTrue(authorize.authorize(user, CommandsContract.PLAY_SOUND));
+        assertTrue(authorize.authorize(user1, CommandsContract.PLAY_SOUND));
+        assertFalse(authorize.authorize(user2, CommandsContract.PLAY_SOUND));
     }
 
     @Test
