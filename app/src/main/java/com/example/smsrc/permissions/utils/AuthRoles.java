@@ -7,8 +7,9 @@ public class AuthRoles {
 
     public static String OWNER = "owner";
     public static String LEVEL_ONE_GUEST = "level 1 guest";
+    public static String LEVEL_TWO_GUEST = "level 2 guest";
 
     public static String[] getRoles(){
-        return new String[]{OWNER, LEVEL_ONE_GUEST};
+        return new String[]{OWNER, LEVEL_ONE_GUEST, LEVEL_TWO_GUEST};
     }
 }

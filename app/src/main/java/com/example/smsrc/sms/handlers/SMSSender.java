@@ -9,6 +9,9 @@ import android.content.IntentFilter;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
+import com.example.smsrc.R;
+import com.example.smsrc.sms.model.SMS;
+
 public class SMSSender {
     private static final String SENT = "SMS_SENT";
     private static final String DELIVERED = "SMS_DELIVERED";
@@ -17,20 +20,12 @@ public class SMSSender {
         this.context = context;
     }
 
-    public void send(String text,String phoneNumber){
-        if (text.isEmpty() || phoneNumber.isEmpty()){
+    public void send(SMS sms){
+        if (sms == null || sms.getDstPhoneNumber().isEmpty()){
             return;
         }
         PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
         PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0, new Intent(DELIVERED), 0);
-
-        context.registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context arg0, Intent arg1) {
-                if (getResultCode() == Activity.RESULT_OK)
-                    Toast.makeText(context,"sending successfully",Toast.LENGTH_SHORT).show();
-            }
-        }, new IntentFilter(SENT));
 
         context.registerReceiver(new BroadcastReceiver() {
             @Override
@@ -49,7 +44,8 @@ public class SMSSender {
         }, new IntentFilter(DELIVERED));
 
         SmsManager smsManger = SmsManager.getDefault();
-        smsManger.sendTextMessage(phoneNumber,null,text,sentPI,deliveredPI);
+        String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
+        smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
 
     }
 
