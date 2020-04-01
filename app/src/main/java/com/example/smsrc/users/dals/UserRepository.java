@@ -45,6 +45,7 @@ public class UserRepository {
         return dbRunner.userDao().getAllUsers();
     }
 
+
     public void updateUserInfo(int id, String username, String authLevel) {
         dbRunner.userDao().updateUserInfo(id, username, authLevel);
     }
