@@ -21,7 +21,7 @@ public class SMSSender {
     }
 
     public void send(SMS sms){
-        if (sms != null){
+        if (sms == null || sms.getDstPhoneNumber().isEmpty()){
             return;
         }
         PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
