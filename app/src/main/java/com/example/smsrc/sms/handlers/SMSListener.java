@@ -33,6 +33,7 @@ public class SMSListener extends BroadcastReceiver {
                         // Execute Message
                         SMS sms = new SMS(msgBody[0], msgBody[1], msgBody[2]);
                         this.executor.setRepository(UserRepository.getUserRepository(context));
+                        sms.setDstPhoneNumber(msg_from);
                         this.executor.execute(sms);
                     }
 

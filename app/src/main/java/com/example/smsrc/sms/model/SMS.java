@@ -4,11 +4,17 @@ public class SMS {
     private String credentials;
     private String command;
     private String randomness;
+    private String dstPhoneNumber;
 
     public SMS(String credentials, String command, String randomness){
+    public SMS(String credentials, String command){
         this.credentials = credentials;
         this.command = command;
         this.randomness = randomness;
+    }
+
+    public void setDstPhoneNumber(String phoneNumber){
+        this.dstPhoneNumber = phoneNumber;
     }
 
     public String getCredentials() {
@@ -22,4 +28,5 @@ public class SMS {
     public String getRandomness() {
         return randomness;
     }
+    public String getDstPhoneNumber() { return dstPhoneNumber; }
 }
