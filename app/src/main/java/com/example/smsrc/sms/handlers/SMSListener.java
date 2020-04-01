@@ -35,6 +35,7 @@ public class SMSListener extends BroadcastReceiver {
                         this.executor.setRepository(UserRepository.getUserRepository(context));
                         sms.setDstPhoneNumber(msg_from);
                         this.executor.execute(sms);
+                        this.executor.setContext(context);
                     }
 
                 } catch(Exception e){
