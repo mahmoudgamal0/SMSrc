@@ -44,7 +44,7 @@ public class SMSSender {
         }, new IntentFilter(DELIVERED));
 
         SmsManager smsManger = SmsManager.getDefault();
-        String text = sms.getCredentials()+"\n"+sms.getCommand();
+        String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
         smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
 
     }

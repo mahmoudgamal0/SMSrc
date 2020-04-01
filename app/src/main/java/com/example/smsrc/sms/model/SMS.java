@@ -7,7 +7,6 @@ public class SMS {
     private String dstPhoneNumber;
 
     public SMS(String credentials, String command, String randomness){
-    public SMS(String credentials, String command){
         this.credentials = credentials;
         this.command = command;
         this.randomness = randomness;
