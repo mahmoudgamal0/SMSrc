@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
+import com.example.smsrc.R;
 import com.example.smsrc.sms.model.SMS;
 
 public class SMSSender {
@@ -25,14 +26,6 @@ public class SMSSender {
         }
         PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
         PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0, new Intent(DELIVERED), 0);
-
-        context.registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context arg0, Intent arg1) {
-                if (getResultCode() == Activity.RESULT_OK)
-                    Toast.makeText(context,"sending successfully",Toast.LENGTH_SHORT).show();
-            }
-        }, new IntentFilter(SENT));
 
         context.registerReceiver(new BroadcastReceiver() {
             @Override
