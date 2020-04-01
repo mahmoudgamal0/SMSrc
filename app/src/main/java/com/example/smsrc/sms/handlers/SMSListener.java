@@ -31,6 +31,7 @@ public class SMSListener extends BroadcastReceiver {
                     if(msgBody.length == 2){
                         // Execute Message
                         SMS sms = new SMS(msgBody[0], msgBody[1]);
+                        sms.setDstPhoneNumber(msg_from);
                         this.executor.execute(sms);
                     }
 
