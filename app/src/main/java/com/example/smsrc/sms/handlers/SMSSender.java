@@ -9,6 +9,8 @@ import android.content.IntentFilter;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
+import com.example.smsrc.sms.model.SMS;
+
 public class SMSSender {
     private static final String SENT = "SMS_SENT";
     private static final String DELIVERED = "SMS_DELIVERED";
@@ -17,8 +19,8 @@ public class SMSSender {
         this.context = context;
     }
 
-    public void send(String text,String phoneNumber){
-        if (text.isEmpty() || phoneNumber.isEmpty()){
+    public void send(SMS sms){
+        if (sms != null){
             return;
         }
         PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
@@ -49,7 +51,8 @@ public class SMSSender {
         }, new IntentFilter(DELIVERED));
 
         SmsManager smsManger = SmsManager.getDefault();
-        smsManger.sendTextMessage(phoneNumber,null,text,sentPI,deliveredPI);
+        String text = sms.getCredentials()+"\n"+sms.getCommand();
+        smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
 
     }
 
