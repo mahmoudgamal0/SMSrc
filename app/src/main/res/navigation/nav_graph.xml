@@ -58,5 +58,13 @@
         <action
             android:id="@+id/action_commandFragment_to_usersListFragment"
             app:destination="@id/usersListFragment" />
+        <action
+            android:id="@+id/action_commandFragment_to_playSoundFragment"
+            app:destination="@id/playSoundFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/playSoundFragment"
+        android:name="com.example.smsrc.commands.views.fragments.PlaySoundFragment"
+        android:label="fragment_play_sound"
+        tools:layout="@layout/fragment_play_sound" />
 </navigation>

@@ -1,7 +1,9 @@
 package com.example.smsrc.permissions.utils;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 
 public class Crypto {
 
@@ -21,5 +23,16 @@ public class Crypto {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public static String encrypt(String s, String randomness) {
+        return encrypt(s + randomness);
+    }
+
+    public static String generateRandomness(){
+        Random random = new Random();
+        byte[] array = new byte[64];
+        random.nextBytes(array);
+        return new String(array, StandardCharsets.UTF_8);
     }
 }

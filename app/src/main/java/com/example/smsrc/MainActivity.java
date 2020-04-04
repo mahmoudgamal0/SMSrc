@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import com.example.smsrc.requester.Requester;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,5 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void showNavigation(){
         findViewById(R.id.home_bottom_nav).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        Requester requester = new Requester(this);
+        requester.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
