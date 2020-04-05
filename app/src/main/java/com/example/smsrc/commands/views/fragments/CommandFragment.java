@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
@@ -35,6 +36,7 @@ public class CommandFragment extends Fragment implements BottomNavigationView.On
         mainActivity.showNavigation();
         BottomNavigationView navigationView = mainActivity.findViewById(R.id.home_bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(this);
+        initListeners(view);
     }
 
     @Override
@@ -50,5 +52,10 @@ public class CommandFragment extends Fragment implements BottomNavigationView.On
                 break;
         }
         return true;
+    }
+
+    private void initListeners(View view) {
+        Button playSoundBtn = view.findViewById(R.id.play_sound_button);
+        playSoundBtn.setOnClickListener(e->navController.navigate(R.id.action_commandFragment_to_playSoundFragment));
     }
 }

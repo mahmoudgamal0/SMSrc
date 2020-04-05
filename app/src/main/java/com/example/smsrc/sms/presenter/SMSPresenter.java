@@ -17,7 +17,8 @@ public class SMSPresenter {
     }
 
     public void sendSMS(SMS sms, String phoneNumber){
-        // TODO call sender
+        sms.setDstPhoneNumber(phoneNumber);
+        sender.send(sms);
     }
 
 }
