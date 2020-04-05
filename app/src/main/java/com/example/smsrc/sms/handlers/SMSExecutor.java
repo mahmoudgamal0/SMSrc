@@ -32,7 +32,7 @@ public class SMSExecutor {
         List<User> allUsers = repository.getAllUsers();
         for (User u: allUsers) {
 
-            hash = Crypto.encrypt(u.getUsername() + sms.getRandomness() + u.getPasscode());
+            hash = Crypto.encrypt(u.getUsername() + u.getPasscode(), sms.getRandomness());
             if(hash.equals(sms.getCredentials())) {
                 user = u;
                 break;
@@ -44,7 +44,7 @@ public class SMSExecutor {
 
         Command command = null;
         for (String commandName: CommandsContract.allCommands) {
-            hash = Crypto.encrypt(commandName + sms.getRandomness());
+            hash = Crypto.encrypt(commandName, sms.getRandomness());
             if(hash.equals(sms.getCommand())) {
                 if (authorize.authorize(user, commandName)) {
                     command = CommandFactory.getCommand(commandName,context);

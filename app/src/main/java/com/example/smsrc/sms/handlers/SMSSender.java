@@ -14,6 +14,8 @@ import com.example.smsrc.requester.Requester;
 import com.example.smsrc.requester.RequesterCallback;
 import com.example.smsrc.sms.model.SMS;
 
+import java.util.ArrayList;
+
 public class SMSSender extends RequesterCallback {
     private static final String SENT = "SMS_SENT";
     private static final String DELIVERED = "SMS_DELIVERED";
@@ -49,8 +51,10 @@ public class SMSSender extends RequesterCallback {
 
         SmsManager smsManger = SmsManager.getDefault();
         String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
-        text = "send from SMSrc there is problem in msg length.";
-        smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
+        //text = "send from SMSrc there is problem in msg length.";
+        ArrayList smsParts = smsManger.divideMessage(text);
+        smsManger.sendMultipartTextMessage(sms.getDstPhoneNumber(),null,smsParts,null,
+                null);
     }
 
     public void send(SMS sms) {
