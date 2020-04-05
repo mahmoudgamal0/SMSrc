@@ -32,7 +32,7 @@ public class SMSExecutor {
         List<User> allUsers = repository.getAllUsers();
         for (User u: allUsers) {
 
-            hash = Crypto.encrypt(u.getUsername() + u.getPasscode() + sms.getRandomness());
+            hash = Crypto.encrypt(u.getUsername() + sms.getRandomness() + u.getPasscode());
             if(hash.equals(sms.getCredentials())) {
                 user = u;
                 break;
