@@ -25,10 +25,6 @@ public class Crypto {
         }
     }
 
-    public static String encrypt(String s, String randomness) {
-        return encrypt(s + randomness);
-    }
-
     public static String generateRandomness(){
         Random random = new Random();
         byte[] array = new byte[16];

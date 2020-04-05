@@ -19,11 +19,7 @@ import com.example.smsrc.commands.model.CommandsContract;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.model.SMS;
 import com.example.smsrc.sms.presenter.SMSPresenter;
-import com.example.smsrc.users.dals.UserRepository;
-import com.example.smsrc.users.models.User;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.List;
 
 public class PlaySoundFragment extends Fragment {
 
@@ -59,11 +55,9 @@ public class PlaySoundFragment extends Fragment {
         String username = ((TextInputEditText)view.findViewById(R.id.play_sound_username)).getText().toString();
         String password = ((TextInputEditText)view.findViewById(R.id.play_sound_password)).getText().toString();
 
+        String encryptedPassword = Crypto.encrypt(password);
         String randomness = Crypto.generateRandomness();
-        UserRepository userRepository = UserRepository.getUserRepository(view.getContext());
-        List<User> users = userRepository.getUserByUsername(username);
-
-        String credentials = Crypto.encrypt(username + users.get(0).getPasscode(), randomness);
+        String credentials = Crypto.encrypt(username + encryptedPassword, randomness);
         String command = Crypto.encrypt(CommandsContract.PLAY_SOUND, randomness);
 
         SMS sms = new SMS(credentials, command, randomness);
