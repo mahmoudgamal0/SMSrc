@@ -16,6 +16,7 @@ import java.util.List;
 
 public class SMSExecutor {
 
+    private Context context;
     private UserRepository repository;
     private Authorize authorize;
     public void setRepository(UserRepository userRepository) {
@@ -46,7 +47,8 @@ public class SMSExecutor {
             hash = Crypto.encrypt(commandName + sms.getRandomness());
             if(hash.equals(sms.getCommand())) {
                 if (authorize.authorize(user, commandName)) {
-                    command = CommandFactory.getCommand(commandName);
+                    command = CommandFactory.getCommand(commandName,context);
+                    break;
                 } else
                     throw new RuntimeException("UnAuthorized command");
             }
@@ -56,5 +58,9 @@ public class SMSExecutor {
             throw new RuntimeException("No such command");
         command.execute( null);
 
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

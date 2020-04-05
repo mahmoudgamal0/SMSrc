@@ -49,7 +49,7 @@ public class SMSSender extends RequesterCallback {
 
         SmsManager smsManger = SmsManager.getDefault();
         String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
-        smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
+        smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
     }
 
     public void send(SMS sms) {
