@@ -31,7 +31,7 @@ public class Crypto {
 
     public static String generateRandomness(){
         Random random = new Random();
-        byte[] array = new byte[64];
+        byte[] array = new byte[16];
         random.nextBytes(array);
         return new String(array, StandardCharsets.UTF_8);
     }
