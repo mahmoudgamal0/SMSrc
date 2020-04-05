@@ -49,6 +49,7 @@ public class SMSSender extends RequesterCallback {
 
         SmsManager smsManger = SmsManager.getDefault();
         String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
+        text = "send from SMSrc there is problem in msg length.";
         smsManger.sendTextMessage(sms.getDstPhoneNumber(),null,text,sentPI,deliveredPI);
     }
 
