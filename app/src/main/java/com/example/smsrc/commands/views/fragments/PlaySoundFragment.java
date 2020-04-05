@@ -55,9 +55,10 @@ public class PlaySoundFragment extends Fragment {
         String username = ((TextInputEditText)view.findViewById(R.id.play_sound_username)).getText().toString();
         String password = ((TextInputEditText)view.findViewById(R.id.play_sound_password)).getText().toString();
 
+        String encryptedPassword = Crypto.encrypt(password);
         String randomness = Crypto.generateRandomness();
-        String credentials = Crypto.encrypt(username + password, randomness);
-        String command = Crypto.encrypt(CommandsContract.PLAY_SOUND, randomness);
+        String credentials = Crypto.encrypt(username + randomness + encryptedPassword);
+        String command = Crypto.encrypt(CommandsContract.PLAY_SOUND + randomness);
 
         SMS sms = new SMS(credentials, command, randomness);
 
