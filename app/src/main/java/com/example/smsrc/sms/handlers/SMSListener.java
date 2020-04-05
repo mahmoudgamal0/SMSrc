@@ -25,9 +25,8 @@ public class SMSListener extends BroadcastReceiver {
                     // Parse Message
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     SmsMessage msg = SmsMessage.createFromPdu((byte[])pdus[0]);
-                    SmsMessage msg2 = SmsMessage.createFromPdu((byte[])pdus[1]);
-                    String msg_from = msg.getOriginatingAddress(); // Can be used later
-                    String text = msg.getMessageBody() + msg2.getMessageBody();
+                    String msg_from = msg.getOriginatingAddress();
+                    String text = msg.getMessageBody();
                     String[] msgBody = text.split("\n");
 
                     // FIXME apply another metric to discover app-specific messages
@@ -38,7 +37,6 @@ public class SMSListener extends BroadcastReceiver {
                         sms.setDstPhoneNumber(msg_from);
                         this.executor.setContext(context);
                         this.executor.execute(sms);
-
                     }
 
                 } catch(Exception e){

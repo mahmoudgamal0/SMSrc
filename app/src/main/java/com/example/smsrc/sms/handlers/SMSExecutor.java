@@ -48,6 +48,7 @@ public class SMSExecutor {
             if(hash.equals(sms.getCommand())) {
                 if (authorize.authorize(user, commandName)) {
                     command = CommandFactory.getCommand(commandName,context);
+                    break;
                 } else
                     throw new RuntimeException("UnAuthorized command");
             }
