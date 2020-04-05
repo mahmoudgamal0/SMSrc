@@ -36,7 +36,7 @@ public class PlaySoundFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        smsPresenter = new SMSPresenter(getContext());
+        smsPresenter = new SMSPresenter(getActivity());
         MainActivity mainActivity = (MainActivity)this.getActivity();
         mainActivity.hideNavigation();
         initListeners(view);
