@@ -57,8 +57,8 @@ public class PlaySoundFragment extends Fragment {
 
         String encryptedPassword = Crypto.encrypt(password);
         String randomness = Crypto.generateRandomness();
-        String credentials = Crypto.encrypt(username + encryptedPassword+randomness);
-        String command = Crypto.encrypt(CommandsContract.PLAY_SOUND+randomness);
+        String credentials = Crypto.encrypt(username + randomness + encryptedPassword);
+        String command = Crypto.encrypt(CommandsContract.PLAY_SOUND + randomness);
 
         SMS sms = new SMS(credentials, command, randomness);
 
