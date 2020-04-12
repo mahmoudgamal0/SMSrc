@@ -1,8 +1,9 @@
 package com.example.smsrc;
 
+import android.content.Context;
+
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.commands.model.CommandsContract;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.handlers.SMSExecutor;
@@ -18,30 +19,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
-
-
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import com.example.smsrc.cache.CacheManager;
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.users.models.User;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -56,7 +34,7 @@ public class SMSExecutorTest {
 
     @Mock
     private UserRepository repository;
-
+    private Context context;
     private ArrayList<User> correctUserList;
 
     @Before
@@ -64,6 +42,8 @@ public class SMSExecutorTest {
 
         user1 = new User("helloworld", "123456", "owner");
         user2 = new User("hellothere", "123456", "level 1 guest");
+
+        context = InstrumentationRegistry.getInstrumentation().getContext();
 
         correctUserList = new ArrayList<>();
         correctUserList.add(user1);
@@ -99,6 +79,8 @@ public class SMSExecutorTest {
                     Crypto.encrypt(CommandsContract.PLAY_SOUND + "test"),
                     "test"
             );
+            executor.setRepository(repository);
+            executor.setContext(context);
             executor.execute(s);
         } catch (Exception e) {
             Assert.fail(e.getMessage());
