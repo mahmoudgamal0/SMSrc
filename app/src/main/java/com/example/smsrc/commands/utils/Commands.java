@@ -4,5 +4,5 @@ import com.example.smsrc.commands.model.Command;
 import com.example.smsrc.commands.model.ModeSwitchCommand;
 
 public class Commands {
-    public static Command modeSwitchCommand = new ModeSwitchCommand();
+    //public static Command modeSwitchCommand = new ModeSwitchCommand();
 }

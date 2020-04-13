@@ -21,7 +21,8 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         Ringtone ringtone = RingtoneManager.getRingtone(context,
                 RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         ringtone.play();
