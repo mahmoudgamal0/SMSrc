@@ -1,11 +1,15 @@
 package com.example.smsrc.commands.model;
 
 import android.app.Application;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.smsrc.MainActivity;
 
@@ -21,7 +25,13 @@ public class PlaySoundCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+        }
+        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
         Ringtone ringtone = RingtoneManager.getRingtone(context,
                 RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
         ringtone.play();
