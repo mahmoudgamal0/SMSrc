@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,10 +62,13 @@ public class PlaySoundFragment extends Fragment {
                 username.length() == 0 ||
                 password.length() == 0
         ) {
+
+            Log.e("PlaySoundFragment", "empty fields");
             Toast.makeText(getContext() ,"please enter all the fields before sending",Toast.LENGTH_LONG).show();
             return;
         }
 
+        Log.i("PlaySoundFragment", "creating SMS to send");
 
         String encryptedPassword = Crypto.encrypt(password);
         String randomness = Crypto.generateRandomness();
@@ -72,12 +76,14 @@ public class PlaySoundFragment extends Fragment {
         String command = Crypto.encrypt(CommandsContract.PLAY_SOUND + randomness);
 
         SMS sms = new SMS(credentials, command, randomness);
+
+        Log.i("PlaySoundFragment", "created SMS");
         try {
             smsPresenter.sendSMS(sms, phoneNumber);
         } catch (Exception e) {
             Toast.makeText(getContext() ,e.getMessage() ,Toast.LENGTH_LONG).show();
         }
-
+        Log.i("PlaySoundFragment", "sent SMS");
     }
 
 

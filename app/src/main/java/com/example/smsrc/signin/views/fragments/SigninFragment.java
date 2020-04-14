@@ -48,6 +48,9 @@ public class SigninFragment extends Fragment {
         signinToUsersBtn.setOnClickListener(v -> {
 
             try {
+
+                Log.i("SigninFragment", "Sign up attempt"); //TODO permission name
+
                 if(presenter.signUpUser(
                         usernameBox.getText().toString(),
                         passwordBox.getText().toString(),
@@ -60,7 +63,7 @@ public class SigninFragment extends Fragment {
                 }
             } catch (Exception e) {
                 Toast.makeText(getContext() ,e.getMessage(),Toast.LENGTH_LONG).show();
-                Log.d("Exception caught", e.getMessage());
+                Log.e("SigninFragment", e.getMessage());
             }
         });
     }

@@ -1,6 +1,7 @@
 package com.example.smsrc.sms.handlers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.smsrc.commands.model.Command;
 import com.example.smsrc.commands.model.CommandFactory;
@@ -27,6 +28,8 @@ public class SMSExecutor {
 
     public void execute(SMS sms) {
 
+        Log.i("SMSExecutor", "executing SMS Protocol has started");
+        Log.d("SMSExecutor", "check if credentials exist");
         String hash;
         User user = null;
         List<User> allUsers = repository.getAllUsers();
@@ -42,10 +45,13 @@ public class SMSExecutor {
         if(user == null)
             throw new RuntimeException("Credentials not found");
 
+        Log.d("SMSExecutor", "check if command exists");
+
         Command command = null;
         for (String commandName: CommandsContract.allCommands) {
             hash = Crypto.encrypt(commandName + sms.getRandomness());
             if(hash.equals(sms.getCommand())) {
+                Log.i("SMSExecutor", "check if user authorized to carry this command");
                 if (authorize.authorize(user, commandName)) {
                     command = CommandFactory.getCommand(commandName,context);
                     break;

@@ -80,7 +80,7 @@ public class UserEditFragment extends Fragment {
                 navController.navigateUp();
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_LONG).show();
-                Log.d("Exception caught", e.getMessage());
+                Log.e("UserEditFragment", e.getMessage());
             }
 
         });

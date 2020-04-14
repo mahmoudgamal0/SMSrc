@@ -48,6 +48,9 @@ public class LoginFragment extends Fragment {
                 }
         );
         loginToUsersBtn.setOnClickListener(v -> {
+
+
+            Log.i("LoginFragment", "Attempt login");
             try {
                 if(presenter.loginUser(
                         usernameBox.getText().toString(),
@@ -56,10 +59,13 @@ public class LoginFragment extends Fragment {
                         new CacheManager(getContext())
                 )) {
                     navController.navigate(R.id.action_loginFragment_to_commandFragment);
+                    Log.i("LoginFragment", "Log in succeeded");
                 }
+
+
             } catch (Exception e) {
                 Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_LONG).show();
-                Log.d("Exception caught", e.getMessage());
+                Log.e("LoginFragment", e.getMessage());
             }
         });
     }
