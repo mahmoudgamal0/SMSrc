@@ -1,10 +1,13 @@
 package com.example.smsrc.login.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,7 +58,8 @@ public class LoginFragment extends Fragment {
                     navController.navigate(R.id.action_loginFragment_to_commandFragment);
                 }
             } catch (Exception e) {
-                //TODO ALERT BOX
+                Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                Log.d("Exception caught", e.getMessage());
             }
         });
     }

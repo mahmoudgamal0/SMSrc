@@ -31,9 +31,7 @@ public class SigninPresenter {
             } catch (Exception e) {
                 throw e;
             }
-
             manager.cacheUser(username);
-
             return true;
         }
     }

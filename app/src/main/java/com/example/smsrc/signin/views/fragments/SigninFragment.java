@@ -1,10 +1,13 @@
 package com.example.smsrc.signin.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -56,7 +59,8 @@ public class SigninFragment extends Fragment {
                     navController.navigate(R.id.action_signinFragment_to_commandFragment);
                 }
             } catch (Exception e) {
-                    e.printStackTrace();
+                Toast.makeText(getContext() ,e.getMessage(),Toast.LENGTH_LONG).show();
+                Log.d("Exception caught", e.getMessage());
             }
         });
     }

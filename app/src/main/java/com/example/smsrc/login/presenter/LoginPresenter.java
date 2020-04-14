@@ -1,6 +1,8 @@
 package com.example.smsrc.login.presenter;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.permissions.models.Authenticate;
@@ -17,10 +19,10 @@ public class LoginPresenter {
 
         try {
             authenticate.authenticate(username, password);
+            manager.cacheUser(username);
         } catch (Exception e) {
             throw e;
         }
-        manager.cacheUser(username);
         return true;
     }
 
