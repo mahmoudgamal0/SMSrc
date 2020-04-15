@@ -82,6 +82,7 @@ public class PlaySoundFragment extends Fragment {
             smsPresenter.sendSMS(sms, phoneNumber);
         } catch (Exception e) {
             Toast.makeText(getContext() ,e.getMessage() ,Toast.LENGTH_LONG).show();
+            Log.e("PlaySoundFragment", e.getMessage());
         }
         Log.i("PlaySoundFragment", "sent SMS");
     }

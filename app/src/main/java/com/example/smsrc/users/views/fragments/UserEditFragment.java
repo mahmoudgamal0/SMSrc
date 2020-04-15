@@ -56,9 +56,6 @@ public class UserEditFragment extends Fragment {
         userRole.setSelection(java.util.Arrays.asList(items).indexOf(user.getAuthLevel()));
 
 
-
-
-
         saveBtn.setOnClickListener(v -> {
 
             if(
