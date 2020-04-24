@@ -30,9 +30,15 @@ public class SMSListener extends BroadcastReceiver {
                     String[] msgBody = text.split("\n");
 
                     // FIXME apply another metric to discover app-specific messages
-                    if(msgBody.length == 3){
+                    if(msgBody.length == 3 || msgBody.length == 4){
                         // Execute Message
-                        SMS sms = new SMS(msgBody[0], msgBody[1], msgBody[2]);
+                        SMS sms;
+                        if (msgBody.length == 4) {
+                            sms = new SMS(msgBody[0], msgBody[1], msgBody[2], msgBody[3]);
+                        } else {
+                            sms = new SMS(msgBody[0], msgBody[1], msgBody[2]);
+                        }
+
                         this.executor.setRepository(UserRepository.getUserRepository(context));
                         sms.setDstPhoneNumber(msg_from);
                         this.executor.setContext(context);

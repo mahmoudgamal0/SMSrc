@@ -9,7 +9,7 @@ public class CommandFactory {
         } else if(commandName.equals(CommandsContract.PLAY_SOUND)){
             return new PlaySoundCommand(context);
         } else if(commandName.equals(CommandsContract.CHANGE_PIN_CODE)){
-            return new ChangePinCodeCommand();
+            return new ChangePinCodeCommand(context);
         } else{
             return null;
         }

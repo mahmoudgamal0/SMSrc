@@ -56,8 +56,12 @@ public class SMSExecutor {
 
         if(command == null)
             throw new RuntimeException("No such command");
-        command.execute( null);
 
+        String[] args = null;
+        if(sms.getBody() != null)
+            args = new String[]{sms.getBody()};
+
+        command.execute( args);
     }
 
     public void setContext(Context context) {
