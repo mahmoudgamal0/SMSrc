@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private DevicePolicyManager dpm;
     private NotificationManager nm;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
