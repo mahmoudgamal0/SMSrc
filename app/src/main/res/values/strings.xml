@@ -15,4 +15,11 @@
     <string name="password">Password</string>
     <string name="phone_number">Phone Number</string>
     <string name="send">Send</string>
+
+    <string name="device_admin_label">Device Admin</string>
+    <string name="device_admin_description">Device Admin Description</string>
+    <string name="device_admin_Activity">Device Admin Activity</string>
+
+    <string name="change_pin_code">Change Pin Code</string>
+    <string name="pin_code">Pin Code</string>
 </resources>

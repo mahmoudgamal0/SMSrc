@@ -17,4 +17,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
 
+    <Button
+        android:id="@+id/change_pin_code_button"
+        android:layout_width="159dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/change_pin_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/play_sound_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

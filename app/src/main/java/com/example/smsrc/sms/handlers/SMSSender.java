@@ -49,6 +49,10 @@ public class SMSSender extends RequesterCallback {
 
         SmsManager smsManger = SmsManager.getDefault();
         String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
+
+        if(sms.getBody() != null)
+            text += "\n" + sms.getBody();
+
         smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
     }
 

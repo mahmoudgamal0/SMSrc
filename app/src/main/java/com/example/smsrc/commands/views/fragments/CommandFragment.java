@@ -56,6 +56,8 @@ public class CommandFragment extends Fragment implements BottomNavigationView.On
 
     private void initListeners(View view) {
         Button playSoundBtn = view.findViewById(R.id.play_sound_button);
+        Button changePinCodeBtn = view.findViewById(R.id.change_pin_code_button);
         playSoundBtn.setOnClickListener(e->navController.navigate(R.id.action_commandFragment_to_playSoundFragment));
+        changePinCodeBtn.setOnClickListener(e->navController.navigate(R.id.action_commandFragment_to_changePinCodeFragment));
     }
 }

@@ -61,10 +61,18 @@
         <action
             android:id="@+id/action_commandFragment_to_playSoundFragment"
             app:destination="@id/playSoundFragment" />
+        <action
+            android:id="@+id/action_commandFragment_to_changePinCodeFragment"
+            app:destination="@id/changePinCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/playSoundFragment"
         android:name="com.example.smsrc.commands.views.fragments.PlaySoundFragment"
         android:label="fragment_play_sound"
         tools:layout="@layout/fragment_play_sound" />
+    <fragment
+        android:id="@+id/changePinCodeFragment"
+        android:name="com.example.smsrc.commands.views.fragments.ChangePinCodeFragment"
+        android:label="fragment_change_pin_code"
+        tools:layout="@layout/fragment_change_pin_code" />
 </navigation>
