@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DevicePolicyManager dpm;
     private NotificationManager nm;
+    private ComponentName policyAdmin;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -29,8 +30,18 @@ public class MainActivity extends AppCompatActivity {
 
         dpm = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
         nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        policyAdmin = new ComponentName(this.getApplicationContext(), DeviceAdminActivity.DeviceAdminActivityReceiver.class);
 
-        checkNotificationActivity();
+        startResultChain();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void startResultChain() {
+        if (!nm.isNotificationPolicyAccessGranted()) {
+            checkNotificationActivity();
+        } else if(!dpm.isAdminActive(policyAdmin)){
+            checkDeviceAdmin();
+        }
     }
 
     public void hideNavigation(){
@@ -50,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkDeviceAdmin() {
-        ComponentName policyAdmin = new ComponentName(this.getApplicationContext(), DeviceAdminActivity.DeviceAdminActivityReceiver.class);
         if(!dpm.isAdminActive(policyAdmin)){
             Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, policyAdmin);
