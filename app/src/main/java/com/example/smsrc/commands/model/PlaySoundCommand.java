@@ -23,7 +23,7 @@ public class PlaySoundCommand implements Command {
     public void execute(String[] args) {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted()) {
             notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
         }
         AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);

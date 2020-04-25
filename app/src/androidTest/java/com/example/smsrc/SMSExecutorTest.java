@@ -1,31 +1,25 @@
 package com.example.smsrc;
 
 import android.content.Context;
-
 import androidx.test.platform.app.InstrumentationRegistry;
-
 import com.example.smsrc.commands.interfaces.CommandsContract;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.handlers.SMSExecutor;
 import com.example.smsrc.sms.model.SMS;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-
 public class SMSExecutorTest {
-
 
     private SMSExecutor executor;
     private User user;
