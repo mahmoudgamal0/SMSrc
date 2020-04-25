@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".commands.views.fragments.PlaySoundFragment">
+    tools:context=".sms.views.fragments.OutboundInformationFragment">
+
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/play_sound_number"
+        android:id="@+id/out_number"
         android:layout_width="257dp"
         android:layout_height="59dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="72dp"
         android:fontFamily="@font/audiowide"
         android:hint="@string/phone_number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,39 +19,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/play_sound_username"
+        android:id="@+id/out_username"
         android:layout_width="257dp"
         android:layout_height="59dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/audiowide"
         android:hint="@string/username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/play_sound_number" />
+        app:layout_constraintTop_toBottomOf="@+id/out_number" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/play_sound_password"
+        android:id="@+id/out_password"
         android:layout_width="257dp"
         android:layout_height="59dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/audiowide"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/play_sound_username" />
+        app:layout_constraintTop_toBottomOf="@+id/out_username" />
 
     <Button
-        android:id="@+id/play_sound_send"
+        android:id="@+id/out_send"
         android:layout_width="117dp"
         android:layout_height="58dp"
         android:layout_marginTop="68dp"
         android:text="@string/send"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/play_sound_password"
-        app:layout_constraintVertical_bias="0.234" />
+        app:layout_constraintTop_toBottomOf="@+id/out_password"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

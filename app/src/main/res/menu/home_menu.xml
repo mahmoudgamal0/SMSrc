@@ -3,9 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_command"
-            android:title="Commands"/>
-        <item android:id="@+id/nav_users"
-            android:title="Users"/>
+        <item
+            android:id="@+id/nav_command"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_commands"
+            />
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_users"
+            />
+        <item
+            android:id="@+id/nav_pin"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/change_pin"
+        />
     </group>
 </menu>

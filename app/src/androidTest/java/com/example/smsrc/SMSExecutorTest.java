@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.example.smsrc.commands.model.CommandsContract;
+import com.example.smsrc.commands.interfaces.CommandsContract;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.handlers.SMSExecutor;
 import com.example.smsrc.sms.model.SMS;
@@ -109,7 +109,7 @@ public class SMSExecutorTest {
         try {
             SMS s = new SMS(
                     Crypto.encrypt(user2.getUsername() + "test" + user2.getPasscode()),
-                    Crypto.encrypt(CommandsContract.CHANGE_PIN_CODE + "test"),
+                    Crypto.encrypt(CommandsContract.LOCK_PHONE + "test"),
                     "test"
             );
             executor.execute(s);

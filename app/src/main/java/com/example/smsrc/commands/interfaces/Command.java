@@ -1,4 +1,4 @@
-package com.example.smsrc.commands.model;
+package com.example.smsrc.commands.interfaces;
 
 public interface Command {
     void execute(String[] args);

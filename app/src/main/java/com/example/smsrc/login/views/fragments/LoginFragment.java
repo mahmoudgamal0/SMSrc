@@ -1,5 +1,6 @@
 package com.example.smsrc.login.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.smsrc.HomeActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.login.presenter.LoginPresenter;
@@ -58,8 +60,8 @@ public class LoginFragment extends Fragment {
                         UserRepository.getUserRepository(getContext()),
                         new CacheManager(getContext())
                 )) {
-                    navController.navigate(R.id.action_loginFragment_to_commandFragment);
                     Log.i("LoginFragment", "Log in succeeded");
+                    startActivity(new Intent(this.getContext(), HomeActivity.class));
                 }
 
 

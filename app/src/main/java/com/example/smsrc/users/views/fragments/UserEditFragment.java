@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.permissions.utils.AuthRoles;
 import com.example.smsrc.users.dals.UserRepository;
@@ -35,8 +34,6 @@ public class UserEditFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        ((MainActivity)this.getActivity()).hideNavigation();
 
         usersPresenter = new UsersPresenter(UserRepository.getUserRepository(this.getContext()));
         navController = Navigation.findNavController(view);

@@ -14,24 +14,32 @@ public class CacheManager {
         sharedPreferences = context.getSharedPreferences("Auth",Context.MODE_PRIVATE);
     }
 
-    public void cacheUser(String username) {
-        //TODO string s
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString( "username", username);
-        editor.apply();
-    }
+    public void cacheUser(String username) { putString("username", username); }
 
     public String getCachedUser() {
         return sharedPreferences.getString("username", null);
     }
 
+    public void cachePin(String pin) { putString("pin", pin); }
+
+    public String getCachedPin() {return sharedPreferences.getString("pin", null); }
+
     public void clearCache(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("username");
+        editor.remove("pin");
         editor.apply();
     }
 
     public boolean isUserCached() {
         return sharedPreferences.contains("username");
+    }
+
+    public boolean isPinCached() { return sharedPreferences.contains("pin"); }
+
+    private void putString(String key, String val){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, val);
+        editor.apply();
     }
 }
