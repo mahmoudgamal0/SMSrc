@@ -35,8 +35,6 @@ public class OutboundInformationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         smsPresenter = new SMSPresenter(getActivity());
-        MainActivity mainActivity = (MainActivity)this.getActivity();
-        mainActivity.hideNavigation();
         initListeners(view);
     }
 

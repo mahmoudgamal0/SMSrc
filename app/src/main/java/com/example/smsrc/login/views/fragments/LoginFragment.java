@@ -1,5 +1,6 @@
 package com.example.smsrc.login.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.smsrc.HomeActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.login.presenter.LoginPresenter;
@@ -52,7 +54,8 @@ public class LoginFragment extends Fragment {
                         UserRepository.getUserRepository(getContext()),
                         new CacheManager(getContext())
                 )) {
-                    navController.navigate(R.id.action_loginFragment_to_commandFragment);
+//                    navController.navigate(R.id.action_loginFragment_to_commandFragment);
+                    startActivity(new Intent(this.getContext(), HomeActivity.class));
                 }
             } catch (Exception e) {
                 //TODO ALERT BOX

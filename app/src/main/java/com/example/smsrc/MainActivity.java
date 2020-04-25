@@ -32,14 +32,6 @@ public class MainActivity extends AppCompatActivity {
         startResultChain();
     }
 
-    public void hideNavigation(){
-        findViewById(R.id.home_bottom_nav).setVisibility(View.GONE);
-    }
-
-    public void showNavigation(){
-        findViewById(R.id.home_bottom_nav).setVisibility(View.VISIBLE);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void startResultChain() {
         if (!nm.isNotificationPolicyAccessGranted()) {
@@ -66,11 +58,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Requester requester = new Requester(this);
-        requester.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -32,8 +32,6 @@ public class UsersListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ((MainActivity)this.getActivity()).showNavigation();
-
         usersPresenter = new UsersPresenter(UserRepository.getUserRepository(this.getContext()));
         navController = Navigation.findNavController(view);
 

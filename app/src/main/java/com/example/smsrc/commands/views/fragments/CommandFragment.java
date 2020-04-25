@@ -9,17 +9,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.commands.interfaces.CommandsContract;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CommandFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class CommandFragment extends Fragment {
 
     private NavController navController;
 
@@ -33,27 +30,9 @@ public class CommandFragment extends Fragment implements BottomNavigationView.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
-        MainActivity mainActivity = (MainActivity)this.getActivity();
-        mainActivity.showNavigation();
-        BottomNavigationView navigationView = mainActivity.findViewById(R.id.home_bottom_nav);
-        navigationView.setOnNavigationItemSelectedListener(this);
         initListeners(view);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()){
-            case R.id.nav_command:
-                if(!navController.getCurrentDestination().getLabel().equals("fragment_command"))
-                    navController.navigate(R.id.action_usersListFragment_to_commandFragment);
-                break;
-            case R.id.nav_users:
-                if(navController.getCurrentDestination().getLabel().equals("fragment_command"))
-                    navController.navigate(R.id.action_commandFragment_to_usersListFragment);
-                break;
-        }
-        return true;
-    }
 
     private void initListeners(View view) {
         Button playSoundBtn = view.findViewById(R.id.play_sound_button);
