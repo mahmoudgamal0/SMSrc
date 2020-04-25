@@ -1,6 +1,8 @@
 package com.example.smsrc.commands.model;
 
-public class ChangePinCodeCommand implements Command {
+import com.example.smsrc.commands.interfaces.Command;
+
+public class LockPhoneCommand implements Command {
     @Override
     public void execute(String[] args) {
 

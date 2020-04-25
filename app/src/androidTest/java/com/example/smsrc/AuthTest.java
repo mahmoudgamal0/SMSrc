@@ -1,6 +1,6 @@
 package com.example.smsrc;
 
-import com.example.smsrc.commands.model.CommandsContract;
+import com.example.smsrc.commands.interfaces.CommandsContract;
 import com.example.smsrc.permissions.models.Authenticate;
 import com.example.smsrc.permissions.models.Authorize;
 import com.example.smsrc.permissions.utils.Crypto;
@@ -69,9 +69,9 @@ public class AuthTest {
         Authorize authorize = new Authorize();
         User user1 = new User(user.getUsername(), user.getPasscode(), "level 1 guest");
         User user2 = new User(user.getUsername(), user.getPasscode(), "level 2 guest");
-        assertTrue(authorize.authorize(user, CommandsContract.CHANGE_PIN_CODE));
-        assertFalse(authorize.authorize(user2, CommandsContract.CHANGE_PIN_CODE));
-        assertFalse(authorize.authorize(user1, CommandsContract.CHANGE_PIN_CODE));
+        assertTrue(authorize.authorize(user, CommandsContract.LOCK_PHONE));
+        assertFalse(authorize.authorize(user2, CommandsContract.LOCK_PHONE));
+        assertFalse(authorize.authorize(user1, CommandsContract.LOCK_PHONE));
         assertTrue(authorize.authorize(user, CommandsContract.PLAY_SOUND));
         assertTrue(authorize.authorize(user1, CommandsContract.PLAY_SOUND));
         assertFalse(authorize.authorize(user2, CommandsContract.PLAY_SOUND));

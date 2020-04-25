@@ -1,17 +1,13 @@
 package com.example.smsrc.commands.model;
 
-import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.media.AudioManager;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.smsrc.MainActivity;
+import com.example.smsrc.commands.interfaces.Command;
 
 import java.util.Timer;
 import java.util.TimerTask;
