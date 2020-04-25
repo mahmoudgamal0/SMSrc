@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pin.PinFragment">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/old_pin"
+        android:layout_width="257dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/audiowide"
+        android:hint="@string/old_pin"
+        android:inputType="numberPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/new_pin"
+        android:layout_width="257dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/audiowide"
+        android:hint="@string/new_pin"
+        android:inputType="numberPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/old_pin" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/confirm_pin"
+        android:layout_width="257dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/audiowide"
+        android:hint="@string/confirm_new_pin"
+        android:inputType="numberPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_pin" />
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_pin" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
