@@ -19,13 +19,13 @@ public class CommandFactory {
             case CommandsContract.PLAY_SOUND:
                 return new PlaySoundCommand(context);
             case CommandsContract.LOCK_PHONE:
-                return new LockPhoneCommand();
+                return new LockPhoneCommand(context);
             case CommandsContract.WIPE_DATA:
-                return new WipeDataCommand();
+                return new WipeDataCommand(context);
             case CommandsContract.ENCRYPT_STORAGE:
-                return new EncryptStorageCommand();
+                return new EncryptStorageCommand(context);
             case CommandsContract.DISABLE_CAMERA:
-                return new DisableCameraCommand();
+                return new DisableCameraCommand(context);
             default:
                 return null;
         }
