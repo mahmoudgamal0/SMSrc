@@ -22,6 +22,8 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SigninFragment extends Fragment {
     private NavController navController;
     private SigninPresenter presenter;
+    private CacheManager cacheManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_signin, container, false);
@@ -32,7 +34,12 @@ public class SigninFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         presenter = new SigninPresenter();
-        instantiateListeners(view);
+        cacheManager = new CacheManager(this.getContext());
+        if(!cacheManager.isUserCached()){
+            instantiateListeners(view);
+        } else {
+            startHomeActivity();
+        }
     }
 
     private void instantiateListeners(View view) {
@@ -45,7 +52,6 @@ public class SigninFragment extends Fragment {
 
         signinToLoginBtn.setOnClickListener(v -> navController.navigate(R.id.action_signinFragment_to_loginFragment));
         signinToUsersBtn.setOnClickListener(v -> {
-
             try {
                 if(presenter.signUpUser(
                         usernameBox.getText().toString(),
@@ -55,11 +61,15 @@ public class SigninFragment extends Fragment {
                         new Authenticate(UserRepository.getUserRepository(getContext())),
                         new CacheManager(getContext()))
                 ) {
-                    startActivity(new Intent(this.getContext(), HomeActivity.class));
+                    startHomeActivity();
                 }
             } catch (Exception e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
         });
+    }
+
+    private void startHomeActivity(){
+        startActivity(new Intent(this.getContext(), HomeActivity.class));
     }
 }
