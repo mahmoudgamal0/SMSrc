@@ -10,8 +10,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import com.example.smsrc.requester.Requester;
 import com.example.smsrc.deviceAdmin.DeviceAdminActivity;
 
 public class MainActivity extends AppCompatActivity {
