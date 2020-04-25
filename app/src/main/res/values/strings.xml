@@ -40,4 +40,12 @@
 
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+
+    <!--  Login and Signup  -->
+    <string name="header_login">LogIn</string>
+    <string name="btn_log_in">Log In</string>
+    <string name="btn_sign_up">SignUp</string>
+    <string name="header_signup">Sign Up</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
