@@ -1,5 +1,6 @@
 package com.example.smsrc.signin.views.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.smsrc.HomeActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.permissions.models.Authenticate;
@@ -53,7 +55,7 @@ public class SigninFragment extends Fragment {
                         new Authenticate(UserRepository.getUserRepository(getContext())),
                         new CacheManager(getContext()))
                 ) {
-                    navController.navigate(R.id.action_signinFragment_to_commandFragment);
+                    startActivity(new Intent(this.getContext(), HomeActivity.class));
                 }
             } catch (Exception e) {
                     e.printStackTrace();
