@@ -20,14 +20,26 @@ public class CacheManager {
         return sharedPreferences.getString("username", null);
     }
 
-    public void cachePin(String pin) { putString("pin", pin); }
+    public void cachePin(String pin) {
+        String key = getCachedUser() + "pin";
+        putString(key, pin);
+    }
 
-    public String getCachedPin() {return sharedPreferences.getString("pin", null); }
+    public String getCachedPin() {
+        String key = getCachedUser() + "pin";
+        return sharedPreferences.getString(key, null);
+    }
 
     public void clearCache(){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("username");
         editor.remove("pin");
+        editor.apply();
+    }
+
+    public void clearUser(){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("username");
         editor.apply();
     }
 

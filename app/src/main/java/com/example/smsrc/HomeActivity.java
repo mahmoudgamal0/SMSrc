@@ -1,10 +1,13 @@
 package com.example.smsrc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 
+import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.requester.Requester;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,6 +55,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        initListeners();
     }
 
     @Override
@@ -97,6 +102,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         Requester requester = new Requester(this);
         requester.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    private void initListeners() {
+        Button logoutBtn = findViewById(R.id.logout_btn);
+        logoutBtn.setOnClickListener(e->{
+            CacheManager cacheManager = new CacheManager(this);
+            cacheManager.clearUser();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
     }
 
     private void closeDrawer(){
