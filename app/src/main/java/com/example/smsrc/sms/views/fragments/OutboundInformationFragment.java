@@ -15,7 +15,6 @@ import android.widget.Button;
 
 import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
-import com.example.smsrc.commands.model.CommandsContract;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.model.SMS;
 import com.example.smsrc.sms.presenter.SMSPresenter;

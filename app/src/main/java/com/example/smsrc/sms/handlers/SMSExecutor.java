@@ -2,10 +2,9 @@ package com.example.smsrc.sms.handlers;
 
 import android.content.Context;
 
-import com.example.smsrc.commands.model.Command;
-import com.example.smsrc.commands.model.CommandFactory;
-import com.example.smsrc.commands.model.CommandsContract;
-import com.example.smsrc.permissions.models.Authenticate;
+import com.example.smsrc.commands.interfaces.Command;
+import com.example.smsrc.commands.factory.CommandFactory;
+import com.example.smsrc.commands.interfaces.CommandsContract;
 import com.example.smsrc.permissions.models.Authorize;
 import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.sms.model.SMS;

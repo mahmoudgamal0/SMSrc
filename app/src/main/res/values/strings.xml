@@ -10,13 +10,21 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="play_sound">Play Sound</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="password">Password</string>
     <string name="phone_number">Phone Number</string>
     <string name="send">Send</string>
 
+    <!--  Device Admin  -->
     <string name="device_admin_label">Device Admin</string>
     <string name="device_admin_description">Device Admin Description</string>
     <string name="device_admin_Activity">Device Admin Activity</string>
+
+    <!--  Commands  -->
+    <string name="play_sound">Play Sound</string>
+    <string name="change_mode">Change Mode</string>
+    <string name="lock_phone">Lock Phone</string>
+    <string name="wipe_data">Wipe Data</string>
+    <string name="encrypt_storage">Encrypt Storage</string>
+    <string name="disable_camera">Disable Camera</string>
 </resources>

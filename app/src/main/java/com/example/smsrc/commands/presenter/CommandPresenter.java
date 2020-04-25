@@ -1,7 +1,7 @@
 package com.example.smsrc.commands.presenter;
 
 import com.example.smsrc.commands.handlers.CommandExecutioner;
-import com.example.smsrc.commands.model.Command;
+import com.example.smsrc.commands.interfaces.Command;
 
 public class CommandPresenter {
     private CommandExecutioner executioner;

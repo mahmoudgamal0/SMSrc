@@ -5,6 +5,8 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.Build;
 
+import com.example.smsrc.commands.interfaces.Command;
+
 public class ModeSwitchCommand implements Command {
 
     private Context context;
