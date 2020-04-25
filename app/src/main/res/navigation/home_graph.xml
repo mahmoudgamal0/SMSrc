@@ -3,16 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/commandFragment">
+    app:startDestination="@id/homeRouterFragment">
 
     <fragment
         android:id="@+id/commandFragment"
         android:name="com.example.smsrc.commands.views.fragments.CommandFragment"
-        android:label="fragment_command"
+        android:label="Commands"
         tools:layout="@layout/fragment_command" >
-        <action
-            android:id="@+id/action_commandFragment_to_usersListFragment"
-            app:destination="@id/usersListFragment" />
         <action
             android:id="@+id/action_commandFragment_to_outboundInformationFragment"
             app:destination="@id/outboundInformationFragment" />
@@ -20,10 +17,7 @@
     <fragment
         android:id="@+id/usersListFragment"
         android:name="com.example.smsrc.users.views.fragments.UsersListFragment"
-        android:label="UsersListFragment" >
-        <action
-            android:id="@+id/action_usersListFragment_to_commandFragment"
-            app:destination="@id/commandFragment" />
+        android:label="Users" >
         <action
             android:id="@+id/action_usersListFragment_to_userEditFragment"
             app:destination="@id/userEditFragment" />
@@ -31,11 +25,31 @@
     <fragment
         android:id="@+id/userEditFragment"
         android:name="com.example.smsrc.users.views.fragments.UserEditFragment"
-        android:label="fragment_user_edit"
+        android:label="UserEdit"
         tools:layout="@layout/fragment_user_edit" />
     <fragment
         android:id="@+id/outboundInformationFragment"
         android:name="com.example.smsrc.sms.views.fragments.OutboundInformationFragment"
-        android:label="fragment_outbound_information"
+        android:label="OutboundInformation"
         tools:layout="@layout/fragment_outbound_information" />
+    <fragment
+        android:id="@+id/pinFragment"
+        android:name="com.example.smsrc.pin.views.fragments.PinFragment"
+        android:label="Pin"
+        tools:layout="@layout/fragment_pin" />
+    <fragment
+        android:id="@+id/homeRouterFragment"
+        android:name="com.example.smsrc.router.HomeRouterFragment"
+        android:label="Router"
+        tools:layout="@layout/fragment_home_router" >
+        <action
+            android:id="@+id/action_homeRouterFragment_to_usersListFragment"
+            app:destination="@id/usersListFragment" />
+        <action
+            android:id="@+id/action_homeRouterFragment_to_commandFragment"
+            app:destination="@id/commandFragment" />
+        <action
+            android:id="@+id/action_homeRouterFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
+    </fragment>
 </navigation>

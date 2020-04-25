@@ -38,13 +38,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_command, R.id.nav_users)
+                R.id.nav_command, R.id.nav_users, R.id.nav_pin)
                 .setDrawerLayout(drawer)
                 .build();
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        navController.navigate(R.id.action_homeRouterFragment_to_commandFragment);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
@@ -64,20 +66,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        // TODO exit
-//        super.onBackPressed();
+
+        if(!isTopLevel())
+            super.onBackPressed();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.nav_command:
-                if(!navController.getCurrentDestination().getLabel().equals("fragment_command"))
-                    navController.navigate(R.id.action_usersListFragment_to_commandFragment);
+                if(!navController.getCurrentDestination().getLabel().equals("Commands")) {
+                    navigateTo(R.id.action_homeRouterFragment_to_commandFragment);
+                }
                 break;
             case R.id.nav_users:
-                if(navController.getCurrentDestination().getLabel().equals("fragment_command"))
-                    navController.navigate(R.id.action_commandFragment_to_usersListFragment);
+                if(!navController.getCurrentDestination().getLabel().equals("Users")){
+                    navigateTo(R.id.action_homeRouterFragment_to_usersListFragment);
+                }
+                break;
+            case R.id.nav_pin:
+                if(!navController.getCurrentDestination().getLabel().equals("Pin")) {
+                    navigateTo(R.id.action_homeRouterFragment_to_pinFragment);
+                }
                 break;
         }
         return true;
@@ -87,5 +97,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         Requester requester = new Requester(this);
         requester.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    private void closeDrawer(){
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void navigateTo(int id){
+        navController.popBackStack();
+        navController.navigate(id);
+        closeDrawer();
+    }
+
+    private boolean isTopLevel(){
+        return navController.getCurrentDestination().getLabel().equals("Pin") ||
+                navController.getCurrentDestination().getLabel().equals("Users") ||
+                navController.getCurrentDestination().getLabel().equals("Commands");
     }
 }
