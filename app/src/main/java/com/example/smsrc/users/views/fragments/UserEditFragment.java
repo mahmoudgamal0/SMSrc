@@ -1,6 +1,7 @@
 package com.example.smsrc.users.views.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,14 +52,31 @@ public class UserEditFragment extends Fragment {
         userName.setText(user.getUsername());
         userRole.setSelection(java.util.Arrays.asList(items).indexOf(user.getAuthLevel()));
 
+
         saveBtn.setOnClickListener(v -> {
-            usersPresenter.updateUser(
-                    user.getId(),
-                    userName.getText().toString(),
-                    userRole.getSelectedItem().toString()
-            );
-            Toast.makeText(this.getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
-            navController.navigateUp();
+
+            if(
+                 userName.getText().toString().length() == 0 ||
+                 usersPresenter.getUserByUsername(userName.getText().toString()) != null
+            ) {
+                Toast.makeText(getContext(), "Username is either empty or already exists", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+
+            try {
+                usersPresenter.updateUser(
+                        user.getId(),
+                        userName.getText().toString(),
+                        userRole.getSelectedItem().toString()
+                );
+                Toast.makeText(this.getContext(), "Saved successfully", Toast.LENGTH_SHORT).show();
+                navController.navigateUp();
+            } catch (Exception e) {
+                Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                Log.e("UserEditFragment", e.getMessage());
+            }
+
         });
     }
 }

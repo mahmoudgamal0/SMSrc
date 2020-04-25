@@ -2,10 +2,13 @@ package com.example.smsrc.signin.views.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -53,6 +56,9 @@ public class SigninFragment extends Fragment {
         signinToLoginBtn.setOnClickListener(v -> navController.navigate(R.id.action_signinFragment_to_loginFragment));
         signinToUsersBtn.setOnClickListener(v -> {
             try {
+
+                Log.i("SigninFragment", "Sign up attempt"); //TODO permission name
+
                 if(presenter.signUpUser(
                         usernameBox.getText().toString(),
                         passwordBox.getText().toString(),
@@ -64,7 +70,8 @@ public class SigninFragment extends Fragment {
                     startHomeActivity();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Toast.makeText(getContext() ,e.getMessage(),Toast.LENGTH_LONG).show();
+                Log.e("SigninFragment", e.getMessage());
             }
         });
     }

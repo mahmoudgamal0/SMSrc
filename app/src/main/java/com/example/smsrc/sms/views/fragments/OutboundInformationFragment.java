@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
@@ -51,6 +53,19 @@ public class OutboundInformationFragment extends Fragment {
         String username = ((TextInputEditText)view.findViewById(R.id.out_username)).getText().toString();
         String password = ((TextInputEditText)view.findViewById(R.id.out_password)).getText().toString();
 
+        if(
+                phoneNumber.length() == 0 ||
+                username.length() == 0 ||
+                password.length() == 0
+        ) {
+
+            Log.e("PlaySoundFragment", "empty fields");
+            Toast.makeText(getContext() ,"please enter all the fields before sending",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Log.i("PlaySoundFragment", "creating SMS to send");
+
         String encryptedPassword = Crypto.encrypt(password);
         String randomness = Crypto.generateRandomness();
         String credentials = Crypto.encrypt(username + randomness + encryptedPassword);
@@ -60,6 +75,14 @@ public class OutboundInformationFragment extends Fragment {
         String command = Crypto.encrypt(commandFromBundle + randomness);
 
         SMS sms = new SMS(credentials, command, randomness);
-        smsPresenter.sendSMS(sms, phoneNumber);
+
+        Log.i("PlaySoundFragment", "created SMS");
+        try {
+            smsPresenter.sendSMS(sms, phoneNumber);
+        } catch (Exception e) {
+            Toast.makeText(getContext() ,e.getMessage() ,Toast.LENGTH_LONG).show();
+            Log.e("PlaySoundFragment", e.getMessage());
+        }
+        Log.i("PlaySoundFragment", "sent SMS");
     }
 }

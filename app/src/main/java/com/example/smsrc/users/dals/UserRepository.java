@@ -1,6 +1,8 @@
 package com.example.smsrc.users.dals;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.example.smsrc.db.DBRunner;
 import com.example.smsrc.users.models.User;
 import java.util.List;
@@ -26,6 +28,7 @@ public class UserRepository {
     }
 
     public void insert(String username, String passcode, String authlevel){
+        Log.d("UserRepository", "inserting new user "+username);
         User user = new User();
         user.setUsername(username);
         user.setPasscode(passcode);
@@ -34,19 +37,26 @@ public class UserRepository {
     }
 
     public List<User> getUserByUsername(String username) {
+        Log.d("UserRepository", "attempt to return "+username);
         return dbRunner.userDao().getUserByUsername(username);
     }
 
     public void nukeTable(){
+
+        Log.d("UserRepository", "deleting all table entries");
         dbRunner.userDao().nukeTable();
     }
 
     public List<User> getAllUsers() {
+
+        Log.d("UserRepository", "get list of all users");
         return dbRunner.userDao().getAllUsers();
     }
 
 
     public void updateUserInfo(int id, String username, String authLevel) {
+
+        Log.d("UserRepository", "update user user "+username);
         dbRunner.userDao().updateUserInfo(id, username, authLevel);
     }
 }

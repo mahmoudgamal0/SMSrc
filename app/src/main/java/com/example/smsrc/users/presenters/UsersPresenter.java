@@ -20,4 +20,11 @@ public class UsersPresenter {
     public List<User> getAllUsers() {
         return repository.getAllUsers();
     }
+
+    public User getUserByUsername(String username) {
+        List<User> users = repository.getUserByUsername(username);
+        if(users.size() == 0)
+            return null;
+        return users.get(0);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.smsrc.signin.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.permissions.models.Authenticate;
@@ -29,11 +30,10 @@ public class SigninPresenter {
                 userRepository.insert(username, Crypto.encrypt(password) , AuthRoles.OWNER);
                 authenticate.authenticate(username, password);
             } catch (Exception e) {
+                Log.e("SigninPresenter", e.getMessage());
                 throw e;
             }
-
             manager.cacheUser(username);
-
             return true;
         }
     }

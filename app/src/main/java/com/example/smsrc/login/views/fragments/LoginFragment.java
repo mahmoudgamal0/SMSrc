@@ -2,10 +2,13 @@ package com.example.smsrc.login.views.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -47,6 +50,9 @@ public class LoginFragment extends Fragment {
                 }
         );
         loginToUsersBtn.setOnClickListener(v -> {
+
+
+            Log.i("LoginFragment", "Attempt login");
             try {
                 if(presenter.loginUser(
                         usernameBox.getText().toString(),
@@ -54,11 +60,14 @@ public class LoginFragment extends Fragment {
                         UserRepository.getUserRepository(getContext()),
                         new CacheManager(getContext())
                 )) {
-//                    navController.navigate(R.id.action_loginFragment_to_commandFragment);
+                    Log.i("LoginFragment", "Log in succeeded");
                     startActivity(new Intent(this.getContext(), HomeActivity.class));
                 }
+
+
             } catch (Exception e) {
-                //TODO ALERT BOX
+                Toast.makeText(getContext(), e.getMessage(),Toast.LENGTH_LONG).show();
+                Log.e("LoginFragment", e.getMessage());
             }
         });
     }

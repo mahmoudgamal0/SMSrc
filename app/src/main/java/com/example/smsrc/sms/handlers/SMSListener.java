@@ -19,6 +19,8 @@ public class SMSListener extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if(intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
+
+            Log.i("SMSListener", "Received SMS");
             Bundle bundle = intent.getExtras();
             if (bundle != null){
                 try{
@@ -29,6 +31,8 @@ public class SMSListener extends BroadcastReceiver {
                     String text = msg.getMessageBody();
                     String[] msgBody = text.split("\n");
 
+                    Log.d("SMSListener", "Check if SMS to this app");
+
                     // FIXME apply another metric to discover app-specific messages
                     if(msgBody.length == 3){
                         // Execute Message
@@ -36,11 +40,12 @@ public class SMSListener extends BroadcastReceiver {
                         this.executor.setRepository(UserRepository.getUserRepository(context));
                         sms.setDstPhoneNumber(msg_from);
                         this.executor.setContext(context);
+                        Log.d("SMSListener", "Pass to executor");
                         this.executor.execute(sms);
                     }
 
                 } catch(Exception e){
-                    Log.d("Exception caught", e.getMessage());
+                    Log.e("SMSListener", e.getMessage());
                 }
             }
         }

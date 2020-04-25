@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.smsrc.requester.Requester;
@@ -25,6 +26,10 @@ public class SMSSender extends RequesterCallback {
     }
 
     private void _send(SMS sms){
+
+        Log.i("SMSSender", "Attempt to send SMS");
+
+
         if (sms == null || sms.getDstPhoneNumber().isEmpty()){
             return;
         }
@@ -34,17 +39,20 @@ public class SMSSender extends RequesterCallback {
         context.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
-                if (getResultCode() == Activity.RESULT_OK)
+                if (getResultCode() == Activity.RESULT_OK) {
+
+                    Log.d("SMSSender", "Send successful");
                     Toast.makeText(context,"sending successfully",Toast.LENGTH_SHORT).show();
-            }
+            }}
         }, new IntentFilter(SENT));
 
         context.registerReceiver(new BroadcastReceiver(){
             @Override
             public void onReceive(Context arg0, Intent arg1) {
-                if(getResultCode() == Activity.RESULT_OK)
+                if(getResultCode() == Activity.RESULT_OK){
+                    Log.d("SMSSender", "delivery successful");
                     Toast.makeText(context,"delivered successfully",Toast.LENGTH_SHORT).show();
-            }
+            }}
         }, new IntentFilter(DELIVERED));
 
         SmsManager smsManger = SmsManager.getDefault();
