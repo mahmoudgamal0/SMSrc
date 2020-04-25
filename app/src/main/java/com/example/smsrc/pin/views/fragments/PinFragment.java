@@ -1,4 +1,4 @@
-package com.example.smsrc.pin;
+package com.example.smsrc.pin.views.fragments;
 
 import android.os.Bundle;
 
@@ -10,15 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.smsrc.R;
 import com.example.smsrc.cache.CacheManager;
+import com.example.smsrc.pin.utils.PinUtils;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class PinFragment extends Fragment {
 
     private CacheManager cacheManager;
+    private PinUtils pinUtils;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +31,8 @@ public class PinFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cacheManager = new CacheManager(this.getContext());
+        pinUtils = new PinUtils(this.getContext());
+
         if(cacheManager.isPinCached()){
             view.findViewById(R.id.old_pin).setVisibility(View.VISIBLE);
         }
@@ -44,35 +47,11 @@ public class PinFragment extends Fragment {
             String confirmPin = ((TextInputEditText)view.findViewById(R.id.confirm_pin)).getText().toString();
             String cachedPin = cacheManager.getCachedPin();
 
-            if(checkOldPin(oldPin, cachedPin) && checkNewPins(newPin, confirmPin)){
+            if(pinUtils.checkPins(oldPin, cachedPin, newPin, confirmPin)){
                 cacheManager.cachePin(newPin);
-                promptMessage("SUCCESS");
             }
         });
     }
 
-    private boolean checkNewPins(String newPin, String confirmPin){
-        if(newPin.isEmpty() || !newPin.equals(confirmPin)) {
-            promptMessage("ERROR: Check that both pins match");
-            return false;
-        }
-        return true;
-    }
 
-    private boolean checkOldPin(String oldPin, String cachedPin) {
-        if(cachedPin != null){
-            if(oldPin.isEmpty()) {
-                promptMessage("ERROR: Please enter the old pin");
-                return false;
-            } else if(!oldPin.equals(cachedPin)){
-                promptMessage("ERROR: Old Pin doesn't match");
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void promptMessage(String message){
-        Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
-    }
 }

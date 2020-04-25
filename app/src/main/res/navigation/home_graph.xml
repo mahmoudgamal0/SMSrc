@@ -34,7 +34,7 @@
         tools:layout="@layout/fragment_outbound_information" />
     <fragment
         android:id="@+id/pinFragment"
-        android:name="com.example.smsrc.pin.PinFragment"
+        android:name="com.example.smsrc.pin.views.fragments.PinFragment"
         android:label="Pin"
         tools:layout="@layout/fragment_pin" />
     <fragment

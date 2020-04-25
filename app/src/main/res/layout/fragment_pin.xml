@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pin.PinFragment">
+    tools:context=".pin.views.fragments.PinFragment">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/old_pin"
@@ -14,6 +14,7 @@
         android:fontFamily="@font/audiowide"
         android:hint="@string/old_pin"
         android:inputType="numberPassword"
+        android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,6 +28,7 @@
         android:fontFamily="@font/audiowide"
         android:hint="@string/new_pin"
         android:inputType="numberPassword"
+        android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/old_pin" />
@@ -39,6 +41,7 @@
         android:fontFamily="@font/audiowide"
         android:hint="@string/confirm_new_pin"
         android:inputType="numberPassword"
+        android:maxLength="4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_pin" />
