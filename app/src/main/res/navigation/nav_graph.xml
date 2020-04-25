@@ -59,12 +59,12 @@
             android:id="@+id/action_commandFragment_to_usersListFragment"
             app:destination="@id/usersListFragment" />
         <action
-            android:id="@+id/action_commandFragment_to_playSoundFragment"
-            app:destination="@id/playSoundFragment" />
+            android:id="@+id/action_commandFragment_to_outboundInformationFragment"
+            app:destination="@id/outboundInformationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/playSoundFragment"
-        android:name="com.example.smsrc.commands.views.fragments.PlaySoundFragment"
-        android:label="fragment_play_sound"
-        tools:layout="@layout/fragment_play_sound" />
+        android:id="@+id/outboundInformationFragment"
+        android:name="com.example.smsrc.sms.views.fragments.OutboundInformationFragment"
+        android:label="fragment_outbound_information"
+        tools:layout="@layout/fragment_outbound_information" />
 </navigation>

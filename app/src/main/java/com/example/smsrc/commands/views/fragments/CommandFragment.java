@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
+import com.example.smsrc.commands.model.CommandsContract;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class CommandFragment extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -56,6 +57,10 @@ public class CommandFragment extends Fragment implements BottomNavigationView.On
 
     private void initListeners(View view) {
         Button playSoundBtn = view.findViewById(R.id.play_sound_button);
-        playSoundBtn.setOnClickListener(e->navController.navigate(R.id.action_commandFragment_to_playSoundFragment));
+        playSoundBtn.setOnClickListener(e->{
+            Bundle bundle = new Bundle();
+            bundle.putString("command", CommandsContract.PLAY_SOUND);
+            navController.navigate(R.id.action_commandFragment_to_outboundInformationFragment, bundle);
+        });
     }
 }
