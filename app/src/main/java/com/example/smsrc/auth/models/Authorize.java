@@ -18,11 +18,20 @@ public class Authorize {
         if(authLevel.equals(AuthRoles.OWNER))
             return true;
         else if(authLevel.equals(AuthRoles.LEVEL_ONE_GUEST))
-            return !operation.equals(CommandsContract.LOCK_PHONE);
+            return checkAuth(operation, AuthRoles.LEVEL_ONE_GUEST_COMMANDS);
         else if(authLevel.equals(AuthRoles.LEVEL_TWO_GUEST))
-            return false;
+            return checkAuth(operation, AuthRoles.LEVEL_TWO_GUEST_COMMANDS);
 
         Log.e("Authorize", "Role doesn't exist");
         throw new RuntimeException("Invalid Auth Role for user");
+    }
+
+    private boolean checkAuth(String command, String[] authRoleCommands){
+        for(String s : authRoleCommands){
+            if(command.equals(s)){
+                return true;
+            }
+        }
+        return false;
     }
 }
