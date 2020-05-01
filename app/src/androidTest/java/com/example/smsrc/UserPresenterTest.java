@@ -1,14 +1,10 @@
 package com.example.smsrc;
 
 
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.permissions.models.Authorize;
-import com.example.smsrc.permissions.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
 import com.example.smsrc.users.presenters.UsersPresenter;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

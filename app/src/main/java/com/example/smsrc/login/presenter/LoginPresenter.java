@@ -1,12 +1,7 @@
 package com.example.smsrc.login.presenter;
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.example.smsrc.cache.CacheManager;
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.models.Authenticate;
 import com.example.smsrc.users.dals.UserRepository;
 
 public class LoginPresenter {

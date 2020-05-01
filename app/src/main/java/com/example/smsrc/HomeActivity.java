@@ -3,17 +3,19 @@ package com.example.smsrc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
 import android.widget.Button;
 
 import com.example.smsrc.cache.CacheManager;
-import com.example.smsrc.requester.Requester;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.smsrc.permissions.interfaces.Handler;
+import com.example.smsrc.permissions.model.DeviceAdminHandler;
+import com.example.smsrc.permissions.model.NotificationManagerHandler;
+import com.example.smsrc.permissions.model.PermissionChain;
+import com.example.smsrc.permissions.model.ReadPhoneStateHandler;
+import com.example.smsrc.permissions.model.SendSMSHandler;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
@@ -29,6 +31,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
     private NavController navController;
+
+    private PermissionChain permissionChain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +61,39 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         initListeners();
+
+        // Getting permissions at run time
+        permissionChain = new PermissionChain();
+        Handler notificationManagerHandler = new NotificationManagerHandler(permissionChain, this);
+        Handler deviceAdminHandler = new DeviceAdminHandler(permissionChain, this);
+        Handler readPhoneStateHandler = new ReadPhoneStateHandler(permissionChain, this);
+        Handler sendSMSHandler = new SendSMSHandler(permissionChain, this);
+
+        permissionChain.setHandler(notificationManagerHandler);
+        notificationManagerHandler.setNext(deviceAdminHandler);
+        deviceAdminHandler.setNext(readPhoneStateHandler);
+        readPhoneStateHandler.setNext(sendSMSHandler);
+
+        permissionChain.start();
     }
 
+    /* -------------------------------   Drawer  ------------------------------------------*/
+
+    private void initListeners() {
+        Button logoutBtn = findViewById(R.id.logout_btn);
+        logoutBtn.setOnClickListener(e->{
+            CacheManager cacheManager = new CacheManager(this);
+            cacheManager.clearUser();
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
+    }
+
+    private void closeDrawer(){
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+    /* -------------------------------   Navigation  ------------------------------------------*/
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -98,27 +133,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        Requester requester = new Requester(this);
-        requester.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-
-
-    private void initListeners() {
-        Button logoutBtn = findViewById(R.id.logout_btn);
-        logoutBtn.setOnClickListener(e->{
-            CacheManager cacheManager = new CacheManager(this);
-            cacheManager.clearUser();
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        });
-    }
-
-    private void closeDrawer(){
-        drawer.closeDrawer(GravityCompat.START);
-    }
-
     private void navigateTo(int id){
         navController.popBackStack();
         navController.navigate(id);
@@ -129,5 +143,29 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return navController.getCurrentDestination().getLabel().equals("Pin") ||
                 navController.getCurrentDestination().getLabel().equals("Users") ||
                 navController.getCurrentDestination().getLabel().equals("Commands");
+    }
+
+    /* -------------------------------   Permissions  ------------------------------------------*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(
+                requestCode == ResultCodes.REQUEST_ACTIVITY_NOTIFICATION ||
+                        requestCode == ResultCodes.REQUEST_CODE_DEVICE_ADMIN
+        ){
+            permissionChain.next();
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(
+                requestCode == ResultCodes.REQUEST_ACTIVITY_NOTIFICATION ||
+                requestCode == ResultCodes.REQUEST_CODE_DEVICE_ADMIN
+        ){
+            permissionChain.next();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

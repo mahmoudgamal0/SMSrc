@@ -5,9 +5,8 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.login.presenter.LoginPresenter;
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.permissions.models.Authorize;
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.models.Authenticate;
+import com.example.smsrc.auth.utils.Crypto;
 import com.example.smsrc.signin.presenter.SigninPresenter;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;

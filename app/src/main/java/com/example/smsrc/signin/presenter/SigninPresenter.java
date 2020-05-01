@@ -1,12 +1,11 @@
 package com.example.smsrc.signin.presenter;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.smsrc.cache.CacheManager;
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.permissions.utils.AuthRoles;
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.models.Authenticate;
+import com.example.smsrc.auth.utils.AuthRoles;
+import com.example.smsrc.auth.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 
 

@@ -1,17 +1,15 @@
 package com.example.smsrc.sms.presenter;
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
-
-import com.example.smsrc.commands.presenter.CommandPresenter;
 import com.example.smsrc.sms.handlers.SMSSender;
 import com.example.smsrc.sms.model.SMS;
 
 public class SMSPresenter {
     private SMSSender sender;
 
-    public SMSPresenter(Activity activity){
-        this.sender = new SMSSender(activity);
+    public SMSPresenter(Context context){
+        this.sender = new SMSSender(context);
     }
 
     public void sendSMS(SMS sms, String phoneNumber){
