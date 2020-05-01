@@ -20,8 +20,8 @@ public class RestoreStatePresenter {
         this.repository = UserRepository.getUserRepository(context);
     }
 
-    public void restorePhoneState(){
-        this.model.restorePhone();
+    public boolean restorePhoneState(){
+        return this.model.restorePhone();
     }
 
     public boolean validateUser(String password, String pin){

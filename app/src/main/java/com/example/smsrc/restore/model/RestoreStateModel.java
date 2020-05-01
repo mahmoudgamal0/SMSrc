@@ -17,7 +17,15 @@ public class RestoreStateModel {
         this.policyAdmin = new ComponentName(context, DeviceAdminActivity.DeviceAdminActivityReceiver.class);
     }
 
-    public void restorePhone() {
-        // TODO
+    public boolean restorePhone() {
+        if(!dpm.isAdminActive(policyAdmin)){
+            return false;
+        }
+        try {
+            dpm.setCameraDisabled(policyAdmin, false);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

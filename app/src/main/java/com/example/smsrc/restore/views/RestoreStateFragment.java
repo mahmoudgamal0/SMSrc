@@ -45,20 +45,18 @@ public class RestoreStateFragment extends Fragment {
         restoreStateBtn.setOnClickListener(e-> {
             String pin = ((TextInputEditText)view.findViewById(R.id.pin)).getText().toString();
             String password = ((TextInputEditText)view.findViewById(R.id.password)).getText().toString();
-            if(cacheManager.getCachedPin() != null){
-                if(presenter.validateUser(password, pin)){
-                    presenter.restorePhoneState();
-                } else {
-                    Toast.makeText(this.getContext(), "Wrong Pin or Password", Toast.LENGTH_LONG).show();
-                }
-            } else {
-                if(presenter.validateUser(password, null)){
-                    presenter.restorePhoneState();
-                } else {
-                    Toast.makeText(this.getContext(), "Wrong Password", Toast.LENGTH_LONG).show();
-                }
+            String msg = "Wrong Pin or Password";
+            if(cacheManager.getCachedPin() == null)
+                msg = "Wrong Password";
+
+            if(presenter.validateUser(password, pin)){
+                if(presenter.restorePhoneState())
+                    msg = "SUCCESS";
+                else
+                    msg = "FAILURE";
             }
 
+            Toast.makeText(this.getContext(), msg, Toast.LENGTH_LONG).show();
         });
     }
 }
