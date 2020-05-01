@@ -55,4 +55,8 @@
     <string name="change_pin">Change Pin</string>
     <string name="logout">Logout</string>
     <string name="restore_state">Restore State</string>
+    <string name="restore_phone_notice">Restoring device state will attempt to revert all executed commands. In order to
+    do so, you need to provide some authentication</string>
+    <string name="restore_device">Restore Device</string>
+    <string name="pin_code">Pin Code</string>
 </resources>

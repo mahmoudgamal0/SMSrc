@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/restoreStateFragment"
-        android:name="com.example.smsrc.restore.RestoreStateFragment"
+        android:name="com.example.smsrc.restore.views.RestoreStateFragment"
         android:label="Restore"
         tools:layout="@layout/fragment_restore_state" />
 </navigation>
