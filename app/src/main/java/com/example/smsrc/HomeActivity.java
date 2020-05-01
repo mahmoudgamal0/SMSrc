@@ -129,6 +129,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     navigateTo(R.id.action_homeRouterFragment_to_pinFragment);
                 }
                 break;
+            case R.id.nav_restore:
+                if(!navController.getCurrentDestination().getLabel().equals("Restore")) {
+                    navigateTo(R.id.action_homeRouterFragment_to_restoreStateFragment);
+                }
         }
         return true;
     }
@@ -142,7 +146,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private boolean isTopLevel(){
         return navController.getCurrentDestination().getLabel().equals("Pin") ||
                 navController.getCurrentDestination().getLabel().equals("Users") ||
-                navController.getCurrentDestination().getLabel().equals("Commands");
+                navController.getCurrentDestination().getLabel().equals("Commands") ||
+                navController.getCurrentDestination().getLabel().equals("Restore");
     }
 
     /* -------------------------------   Permissions  ------------------------------------------*/

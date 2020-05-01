@@ -55,4 +55,5 @@
     <string name="change_pin">Change Pin</string>
     <string name="logout">Logout</string>
     <string name="is_alive">Is Alive</string>
+    <string name="restore_state">Restore State</string>
 </resources>

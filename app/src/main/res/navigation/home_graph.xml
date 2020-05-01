@@ -51,5 +51,13 @@
         <action
             android:id="@+id/action_homeRouterFragment_to_pinFragment"
             app:destination="@id/pinFragment" />
+        <action
+            android:id="@+id/action_homeRouterFragment_to_restoreStateFragment"
+            app:destination="@id/restoreStateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/restoreStateFragment"
+        android:name="com.example.smsrc.restore.RestoreStateFragment"
+        android:label="Restore"
+        tools:layout="@layout/fragment_restore_state" />
 </navigation>
