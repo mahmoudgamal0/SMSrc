@@ -1,4 +1,4 @@
-package com.example.smsrc.permissions.utils;
+package com.example.smsrc.auth.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

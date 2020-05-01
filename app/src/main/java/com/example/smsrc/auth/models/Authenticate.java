@@ -1,9 +1,9 @@
-package com.example.smsrc.permissions.models;
+package com.example.smsrc.auth.models;
 
 
 import android.util.Log;
 
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
 

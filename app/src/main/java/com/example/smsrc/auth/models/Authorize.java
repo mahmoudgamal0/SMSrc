@@ -1,9 +1,9 @@
-package com.example.smsrc.permissions.models;
+package com.example.smsrc.auth.models;
 
 import android.util.Log;
 
 import com.example.smsrc.commands.interfaces.CommandsContract;
-import com.example.smsrc.permissions.utils.AuthRoles;
+import com.example.smsrc.auth.utils.AuthRoles;
 import com.example.smsrc.users.models.User;
 
 public class Authorize {

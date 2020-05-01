@@ -3,7 +3,7 @@ package com.example.smsrc;
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.smsrc.commands.interfaces.CommandsContract;
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.utils.Crypto;
 import com.example.smsrc.sms.handlers.SMSExecutor;
 import com.example.smsrc.sms.model.SMS;
 import com.example.smsrc.users.dals.UserRepository;

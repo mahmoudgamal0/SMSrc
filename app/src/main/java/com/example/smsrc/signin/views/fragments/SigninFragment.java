@@ -16,7 +16,7 @@ import androidx.navigation.Navigation;
 import com.example.smsrc.HomeActivity;
 import com.example.smsrc.R;
 import com.example.smsrc.cache.CacheManager;
-import com.example.smsrc.permissions.models.Authenticate;
+import com.example.smsrc.auth.models.Authenticate;
 import com.example.smsrc.signin.presenter.SigninPresenter;
 import com.example.smsrc.users.dals.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
