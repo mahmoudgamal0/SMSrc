@@ -52,7 +52,7 @@ public class SMSExecutor {
             if(hash.equals(sms.getCommand())) {
                 Log.i("SMSExecutor", "check if user authorized to carry this command");
                 if (authorize.authorize(user, commandName)) {
-                    command = CommandFactory.getCommand(commandName,context);
+                    command = CommandFactory.getCommand(commandName, context);
                     break;
                 } else
                     throw new RuntimeException("UnAuthorized command");
@@ -61,7 +61,9 @@ public class SMSExecutor {
 
         if(command == null)
             throw new RuntimeException("No such command");
-        command.execute( null);
+
+        String[] args = new String[]{sms.getDstPhoneNumber()};
+        command.execute( args);
 
     }
 

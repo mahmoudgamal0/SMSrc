@@ -14,7 +14,6 @@ public class SMSPresenter {
 
     public void sendSMS(SMS sms, String phoneNumber){
         sms.setDstPhoneNumber(phoneNumber);
-
         Log.i("SMSPresenter", "Sending message to "+phoneNumber);
         sender.send(sms);
     }

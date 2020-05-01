@@ -1,6 +1,5 @@
 package com.example.smsrc.sms.handlers;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,6 +9,8 @@ import android.content.IntentFilter;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.smsrc.sms.model.LifeLineSMS;
 import com.example.smsrc.sms.model.SMS;
 
 public class SMSSender {
@@ -29,6 +30,17 @@ public class SMSSender {
         PendingIntent sentPI = PendingIntent.getBroadcast(context, 0, new Intent(SENT), 0);
         PendingIntent deliveredPI = PendingIntent.getBroadcast(context, 0, new Intent(DELIVERED), 0);
 
+        registerReceivers(!(sms instanceof LifeLineSMS));
+
+        SmsManager smsManger = SmsManager.getDefault();
+        String text = sms.getMessage();
+        smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
+    }
+
+    private void registerReceivers(boolean shouldRegister){
+        if(!shouldRegister)
+            return;
+
         context.registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context arg0, Intent arg1) {
@@ -36,7 +48,7 @@ public class SMSSender {
 
                     Log.d("SMSSender", "Send successful");
                     Toast.makeText(context,"sending successfully",Toast.LENGTH_SHORT).show();
-            }}
+                }}
         }, new IntentFilter(SENT));
 
         context.registerReceiver(new BroadcastReceiver(){
@@ -45,11 +57,7 @@ public class SMSSender {
                 if(getResultCode() == Activity.RESULT_OK){
                     Log.d("SMSSender", "delivery successful");
                     Toast.makeText(context,"delivered successfully",Toast.LENGTH_SHORT).show();
-            }}
+                }}
         }, new IntentFilter(DELIVERED));
-
-        SmsManager smsManger = SmsManager.getDefault();
-        String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
-        smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
     }
 }

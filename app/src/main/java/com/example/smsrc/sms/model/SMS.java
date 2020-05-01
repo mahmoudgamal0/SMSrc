@@ -28,4 +28,8 @@ public class SMS {
         return randomness;
     }
     public String getDstPhoneNumber() { return dstPhoneNumber; }
+
+    public String getMessage() {
+        return credentials+"\n"+command+"\n"+randomness;
+    }
 }

@@ -57,6 +57,14 @@
                 android:layout_height="53dp"
                 android:text="@string/disable_camera"
                 android:layout_marginTop="32dp"/>
+
+            <Button
+                android:id="@+id/is_alive_button"
+                android:layout_width="159dp"
+                android:layout_height="53dp"
+                android:text="@string/is_alive"
+                android:layout_marginTop="32dp"/>
+
         </LinearLayout>
 
     </ScrollView>
