@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.example.smsrc.R;
-import com.example.smsrc.permissions.utils.AuthRoles;
+import com.example.smsrc.auth.utils.AuthRoles;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
 import com.example.smsrc.users.presenters.UsersPresenter;

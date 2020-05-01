@@ -1,4 +1,4 @@
-package com.example.smsrc.permissions.utils;
+package com.example.smsrc.auth.utils;
 
 public class AuthRoles {
     public static String ADD = "add";

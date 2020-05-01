@@ -1,9 +1,9 @@
 package com.example.smsrc;
 
 import com.example.smsrc.commands.interfaces.CommandsContract;
-import com.example.smsrc.permissions.models.Authenticate;
-import com.example.smsrc.permissions.models.Authorize;
-import com.example.smsrc.permissions.utils.Crypto;
+import com.example.smsrc.auth.models.Authenticate;
+import com.example.smsrc.auth.models.Authorize;
+import com.example.smsrc.auth.utils.Crypto;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
 import org.junit.Assert;

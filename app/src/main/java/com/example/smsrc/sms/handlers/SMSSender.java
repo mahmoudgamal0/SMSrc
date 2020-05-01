@@ -10,26 +10,19 @@ import android.content.IntentFilter;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.example.smsrc.requester.Requester;
-import com.example.smsrc.requester.RequesterCallback;
 import com.example.smsrc.sms.model.SMS;
 
-public class SMSSender extends RequesterCallback {
+public class SMSSender {
     private static final String SENT = "SMS_SENT";
     private static final String DELIVERED = "SMS_DELIVERED";
     private Context context;
-    private Activity activity;
-    public SMSSender(Activity activity){
-        this.activity = activity;
-        this.context = activity.getApplicationContext();
+
+    public SMSSender(Context context){
+        this.context = context;
     }
 
-    private void _send(SMS sms){
-
+    public void send(SMS sms){
         Log.i("SMSSender", "Attempt to send SMS");
-
-
         if (sms == null || sms.getDstPhoneNumber().isEmpty()){
             return;
         }
@@ -58,17 +51,5 @@ public class SMSSender extends RequesterCallback {
         SmsManager smsManger = SmsManager.getDefault();
         String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
         smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
-    }
-
-    public void send(SMS sms) {
-        Requester requester = new Requester(activity);
-        requester.requestPermission(this, Manifest.permission.READ_PHONE_STATE, new Object[]{sms});
-    }
-
-    @Override
-    public void onSuccess(Object[] args) {
-        if(args.length > 0 && args[0] instanceof SMS){
-            this._send((SMS)args[0]);
-        }
     }
 }
