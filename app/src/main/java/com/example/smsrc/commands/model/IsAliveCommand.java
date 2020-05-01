@@ -8,12 +8,9 @@ import com.example.smsrc.sms.model.SMS;
 import com.example.smsrc.sms.presenter.SMSPresenter;
 
 public class IsAliveCommand implements Command {
-
-    private Context context;
     private SMSPresenter smsPresenter;
 
     public IsAliveCommand(Context context) {
-        this.context = context;
         this.smsPresenter = new SMSPresenter(context);
     }
 
