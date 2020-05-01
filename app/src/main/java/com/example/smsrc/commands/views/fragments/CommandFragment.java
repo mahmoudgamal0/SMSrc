@@ -41,6 +41,7 @@ public class CommandFragment extends Fragment {
         Button wipeDataBtn = view.findViewById(R.id.wipe_data_button);
         Button encryptStorageBtn = view.findViewById(R.id.encrypt_storage_button);
         Button disableCameraBtn = view.findViewById(R.id.disable_camera_button);
+        Button isAlive = view.findViewById(R.id.is_alive_button);
 
         playSoundBtn.setOnClickListener(e->navigateToNext(CommandsContract.PLAY_SOUND));
         modeSwitchBtn.setOnClickListener(e->navigateToNext(CommandsContract.MODE_SWITCH));
@@ -48,6 +49,7 @@ public class CommandFragment extends Fragment {
         wipeDataBtn.setOnClickListener(e->navigateToNext(CommandsContract.WIPE_DATA));
         encryptStorageBtn.setOnClickListener(e->navigateToNext(CommandsContract.ENCRYPT_STORAGE));
         disableCameraBtn.setOnClickListener(e->navigateToNext(CommandsContract.DISABLE_CAMERA));
+        isAlive.setOnClickListener(e->navigateToNext(CommandsContract.IS_ALIVE));
     }
 
     private void navigateToNext(String command) {

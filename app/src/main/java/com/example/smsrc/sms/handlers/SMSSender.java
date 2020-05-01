@@ -20,15 +20,14 @@ public class SMSSender extends RequesterCallback {
     private static final String DELIVERED = "SMS_DELIVERED";
     private Context context;
     private Activity activity;
+
     public SMSSender(Activity activity){
         this.activity = activity;
         this.context = activity.getApplicationContext();
     }
 
     private void _send(SMS sms){
-
         Log.i("SMSSender", "Attempt to send SMS");
-
 
         if (sms == null || sms.getDstPhoneNumber().isEmpty()){
             return;
@@ -56,7 +55,7 @@ public class SMSSender extends RequesterCallback {
         }, new IntentFilter(DELIVERED));
 
         SmsManager smsManger = SmsManager.getDefault();
-        String text = sms.getCredentials()+"\n"+sms.getCommand()+"\n"+ sms.getRandomness();
+        String text = sms.getMessage();
         smsManger.sendTextMessage(sms.getDstPhoneNumber(), null, text, sentPI, deliveredPI);
     }
 

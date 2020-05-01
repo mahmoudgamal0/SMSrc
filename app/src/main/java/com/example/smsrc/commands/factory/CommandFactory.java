@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.smsrc.commands.model.DisableCameraCommand;
 import com.example.smsrc.commands.model.EncryptStorageCommand;
+import com.example.smsrc.commands.model.IsAliveCommand;
 import com.example.smsrc.commands.model.LockPhoneCommand;
 import com.example.smsrc.commands.interfaces.Command;
 import com.example.smsrc.commands.interfaces.CommandsContract;
@@ -26,6 +27,8 @@ public class CommandFactory {
                 return new EncryptStorageCommand(context);
             case CommandsContract.DISABLE_CAMERA:
                 return new DisableCameraCommand(context);
+            case CommandsContract.IS_ALIVE:
+                return new IsAliveCommand(context);
             default:
                 return null;
         }
