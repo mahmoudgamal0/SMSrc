@@ -3,7 +3,6 @@ package com.example.smsrc.auth.utils;
 import com.example.smsrc.commands.interfaces.CommandsContract;
 
 public class AuthRoles {
-    public static String ADD = "add";
     public static String EDIT = "edit";
     public static String DELETE = "delete";
 
@@ -25,4 +24,15 @@ public class AuthRoles {
             CommandsContract.PLAY_SOUND,
             CommandsContract.IS_ALIVE
     };
+
+    public static String[] MANAGER_ROLES = {
+            EDIT, DELETE
+    };
+
+    public static String[] LEVEL_TWO_GUEST_MANAGER_ROLES = {};
+
+    public static String[] LEVEL_ONE_GUEST_MANAGER_ROLES = {
+            EDIT
+    };
+
 }

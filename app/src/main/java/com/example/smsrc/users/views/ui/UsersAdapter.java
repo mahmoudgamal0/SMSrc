@@ -21,9 +21,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
     private List<User> users;
     private NavController navController;
-    public UsersAdapter(List<User> users, NavController navController){
+    private User admin;
+    private boolean canEdit;
+    private boolean canDelete;
+
+    public UsersAdapter(List<User> users, NavController navController, User admin, boolean canEdit, boolean canDelete){
         this.users = users;
         this.navController = navController;
+        this.admin = admin;
+        this.canEdit = canEdit;
+        this.canDelete = canDelete;
     }
 
 
@@ -39,12 +46,24 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         TextView userNameTextView = holder.content.findViewById(R.id.user_name);
         TextView userRoleTextView = holder.content.findViewById(R.id.user_role_spinner);
         Button editButton = holder.content.findViewById(R.id.user_edit);
+        Button deleteButton = holder.content.findViewById(R.id.user_delete);
+
         User user = users.get(position);
         userNameTextView.setText("Username: " + user.getUsername());
         userRoleTextView.setText("UserRole: " + user.getAuthLevel());
+
         Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
-        editButton.setOnClickListener(e -> navController.navigate(R.id.action_usersListFragment_to_userEditFragment, bundle));
+
+        if(canEdit && !user.getUsername().equals(admin.getUsername())){
+            editButton.setVisibility(View.VISIBLE);
+            editButton.setOnClickListener(e -> navController.navigate(R.id.action_usersListFragment_to_userEditFragment, bundle));
+        }
+
+        if(canDelete && !user.getUsername().equals(admin.getUsername())) {
+            deleteButton.setVisibility(View.VISIBLE);
+            // DO action
+        }
     }
 
     @Override
