@@ -27,4 +27,8 @@ public class UsersPresenter {
             return null;
         return users.get(0);
     }
+
+    public void deleteUser(String username) {
+        repository.deleteUser(username);
+    }
 }

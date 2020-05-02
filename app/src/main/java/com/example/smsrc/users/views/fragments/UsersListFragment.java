@@ -54,7 +54,14 @@ public class UsersListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new UsersAdapter(usersPresenter.getAllUsers(), navController, currentUser, canEdit, canDelete);
+        UsersAdapter.AdapterPayload payload = new UsersAdapter.AdapterPayload();
+        payload.setAdmin(currentUser);
+        payload.setCanEdit(canEdit);
+        payload.setCanDelete(canDelete);
+        payload.setNavController(navController);
+        payload.setPresenter(usersPresenter);
+
+        mAdapter = new UsersAdapter(usersPresenter.getAllUsers(), payload);
         recyclerView.setAdapter(mAdapter);
     }
 }
