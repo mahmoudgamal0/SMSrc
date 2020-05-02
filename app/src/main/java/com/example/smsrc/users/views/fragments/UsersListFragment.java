@@ -9,9 +9,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.smsrc.HomeActivity;
 import com.example.smsrc.MainActivity;
 import com.example.smsrc.R;
+import com.example.smsrc.auth.models.Authorize;
+import com.example.smsrc.auth.utils.AuthRoles;
 import com.example.smsrc.users.dals.UserRepository;
+import com.example.smsrc.users.models.User;
 import com.example.smsrc.users.presenters.UsersPresenter;
 import com.example.smsrc.users.views.ui.UsersAdapter;
 
@@ -32,6 +37,14 @@ public class UsersListFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Authorize authorize = new Authorize();
+        User currentUser = ((HomeActivity)this.getActivity()).getCurrentUser();
+
+        // Check Edit
+        boolean canEdit = authorize.authorizeManagement(currentUser, AuthRoles.EDIT);
+        // Check Delete
+        boolean canDelete = authorize.authorizeManagement(currentUser, AuthRoles.DELETE);
+
         usersPresenter = new UsersPresenter(UserRepository.getUserRepository(this.getContext()));
         navController = Navigation.findNavController(view);
 
@@ -41,7 +54,14 @@ public class UsersListFragment extends Fragment {
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new UsersAdapter(usersPresenter.getAllUsers(), navController);
+        UsersAdapter.AdapterPayload payload = new UsersAdapter.AdapterPayload();
+        payload.setAdmin(currentUser);
+        payload.setCanEdit(canEdit);
+        payload.setCanDelete(canDelete);
+        payload.setNavController(navController);
+        payload.setPresenter(usersPresenter);
+
+        mAdapter = new UsersAdapter(usersPresenter.getAllUsers(), payload);
         recyclerView.setAdapter(mAdapter);
     }
 }

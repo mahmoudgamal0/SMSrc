@@ -69,12 +69,12 @@ public class AuthTest {
         Authorize authorize = new Authorize();
         User user1 = new User(user.getUsername(), user.getPasscode(), "level 1 guest");
         User user2 = new User(user.getUsername(), user.getPasscode(), "level 2 guest");
-        assertTrue(authorize.authorize(user, CommandsContract.LOCK_PHONE));
-        assertFalse(authorize.authorize(user2, CommandsContract.LOCK_PHONE));
-        assertFalse(authorize.authorize(user1, CommandsContract.LOCK_PHONE));
-        assertTrue(authorize.authorize(user, CommandsContract.PLAY_SOUND));
-        assertTrue(authorize.authorize(user1, CommandsContract.PLAY_SOUND));
-        assertFalse(authorize.authorize(user2, CommandsContract.PLAY_SOUND));
+        assertTrue(authorize.authorizeCommand(user, CommandsContract.LOCK_PHONE));
+        assertFalse(authorize.authorizeCommand(user2, CommandsContract.LOCK_PHONE));
+        assertFalse(authorize.authorizeCommand(user1, CommandsContract.LOCK_PHONE));
+        assertTrue(authorize.authorizeCommand(user, CommandsContract.PLAY_SOUND));
+        assertTrue(authorize.authorizeCommand(user1, CommandsContract.PLAY_SOUND));
+        assertFalse(authorize.authorizeCommand(user2, CommandsContract.PLAY_SOUND));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class AuthTest {
         Authorize authorize = new Authorize();
         User user1 = new User(user.getUsername(), user.getPasscode(), "rubbish");
         try {
-            authorize.authorize(user1, "add");
+            authorize.authorizeCommand(user1, "add");
             Assert.fail();
         } catch (RuntimeException e) {
             assertEquals("Invalid Auth Role for user", e.getMessage());

@@ -55,14 +55,16 @@ public class UserEditFragment extends Fragment {
 
         saveBtn.setOnClickListener(v -> {
 
-            if(
-                 userName.getText().toString().length() == 0 ||
-                 usersPresenter.getUserByUsername(userName.getText().toString()) != null
-            ) {
-                Toast.makeText(getContext(), "Username is either empty or already exists", Toast.LENGTH_LONG).show();
+            if(userName.getText().toString().length() == 0) {
+                Toast.makeText(getContext(), "Username is empty", Toast.LENGTH_LONG).show();
                 return;
             }
 
+            User attemptedUser = usersPresenter.getUserByUsername(userName.getText().toString());
+            if(attemptedUser != null && attemptedUser.getId() != user.getId()){
+                Toast.makeText(getContext(), "Username already exists", Toast.LENGTH_LONG).show();
+                return;
+            }
 
             try {
                 usersPresenter.updateUser(

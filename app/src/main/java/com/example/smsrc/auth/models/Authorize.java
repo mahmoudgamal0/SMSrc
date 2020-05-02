@@ -8,9 +8,7 @@ import com.example.smsrc.users.models.User;
 
 public class Authorize {
 
-    public boolean authorize(User user, String operation){
-
-
+    public boolean authorizeCommand(User user, String operation){
         Log.i("Authorize", "check if user "+ user.getUsername() +
                 "authorized for command " + operation);
 
@@ -21,6 +19,19 @@ public class Authorize {
             return checkAuth(operation, AuthRoles.LEVEL_ONE_GUEST_COMMANDS);
         else if(authLevel.equals(AuthRoles.LEVEL_TWO_GUEST))
             return checkAuth(operation, AuthRoles.LEVEL_TWO_GUEST_COMMANDS);
+
+        Log.e("Authorize", "Role doesn't exist");
+        throw new RuntimeException("Invalid Auth Role for user");
+    }
+
+    public boolean authorizeManagement(User user, String operation){
+        String authLevel = user.getAuthLevel();
+        if(authLevel.equals(AuthRoles.OWNER))
+            return true;
+        else if(authLevel.equals(AuthRoles.LEVEL_ONE_GUEST))
+            return checkAuth(operation, AuthRoles.LEVEL_ONE_GUEST_MANAGER_ROLES);
+        else if(authLevel.equals(AuthRoles.LEVEL_TWO_GUEST))
+            return checkAuth(operation, AuthRoles.LEVEL_TWO_GUEST_MANAGER_ROLES);
 
         Log.e("Authorize", "Role doesn't exist");
         throw new RuntimeException("Invalid Auth Role for user");

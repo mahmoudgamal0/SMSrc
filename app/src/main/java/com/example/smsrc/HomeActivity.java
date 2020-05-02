@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.smsrc.cache.CacheManager;
 import com.example.smsrc.permissions.interfaces.Handler;
@@ -12,6 +13,8 @@ import com.example.smsrc.permissions.model.NotificationManagerHandler;
 import com.example.smsrc.permissions.model.PermissionChain;
 import com.example.smsrc.permissions.model.ReadPhoneStateHandler;
 import com.example.smsrc.permissions.model.SendSMSHandler;
+import com.example.smsrc.users.dals.UserRepository;
+import com.example.smsrc.users.models.User;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -31,8 +34,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     private DrawerLayout drawer;
     private NavController navController;
-
     private PermissionChain permissionChain;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +78,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         readPhoneStateHandler.setNext(sendSMSHandler);
 
         permissionChain.start();
+
+        // Getting current user
+        getAndInflateUserInfo(navigationView);
     }
 
     /* -------------------------------   Drawer  ------------------------------------------*/
@@ -173,4 +179,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    /* -----------------------------  User Management  -----------------------------------*/
+    private void getAndInflateUserInfo(NavigationView view) {
+        CacheManager cacheManager = new CacheManager(this.getApplicationContext());
+        UserRepository repository = UserRepository.getUserRepository(this.getApplicationContext());
+        this.user = repository.getUserByUsername(cacheManager.getCachedUser()).get(0);
+        TextView usernamePlaceholder = view.getHeaderView(0).findViewById(R.id.username_placeholder);
+        TextView authRolePlaceholder = view.getHeaderView(0).findViewById(R.id.role_placeholder);
+        usernamePlaceholder.setText("Username: " + this.user.getUsername());
+        authRolePlaceholder.setText("Role: " + this.user.getAuthLevel());
+    }
+
+    public User getCurrentUser(){ return this.user; }
 }

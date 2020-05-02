@@ -60,4 +60,5 @@
     do so, you need to provide some authentication</string>
     <string name="restore_device">Restore Device</string>
     <string name="pin_code">Pin Code</string>
+    <string name="delete">DELETE</string>
 </resources>

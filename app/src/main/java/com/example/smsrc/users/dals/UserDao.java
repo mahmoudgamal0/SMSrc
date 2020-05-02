@@ -23,4 +23,7 @@ public interface UserDao {
 
     @Query("UPDATE USER SET username =:username, authLevel =:authLevel WHERE id =:id")
     void updateUserInfo(int id, String username, String authLevel);
+
+    @Query("DELETE FROM USER WHERE username =:username")
+    void deleteUser(String username);
 }

@@ -51,7 +51,7 @@ public class SMSExecutor {
             hash = Crypto.encrypt(commandName + sms.getRandomness());
             if(hash.equals(sms.getCommand())) {
                 Log.i("SMSExecutor", "check if user authorized to carry this command");
-                if (authorize.authorize(user, commandName)) {
+                if (authorize.authorizeCommand(user, commandName)) {
                     command = CommandFactory.getCommand(commandName, context);
                     break;
                 } else
