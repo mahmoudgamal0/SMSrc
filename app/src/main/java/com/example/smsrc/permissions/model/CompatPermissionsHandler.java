@@ -28,7 +28,8 @@ public class CompatPermissionsHandler implements Handler {
         this.permissions = new String[]{
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.SEND_SMS,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.RECEIVE_SMS
         };
     }
 
