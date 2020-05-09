@@ -26,8 +26,7 @@ public class WipeDataCommand implements Command {
             throw new RuntimeException("Cannot perform this command since device admin is not activated");
         }
 
-        dpm.wipeData(DevicePolicyManager.WIPE_SILENTLY);
-        dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE);
         dpm.wipeData(0);
+        dpm.setMaximumFailedPasswordsForWipe(policyAdmin, 1);
     }
 }
