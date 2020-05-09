@@ -12,6 +12,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        // For demo crash
+        // throw new RuntimeException("This is the demo crash");
         new Handler().postDelayed(this::startMainActivity, 3000);
     }
 
