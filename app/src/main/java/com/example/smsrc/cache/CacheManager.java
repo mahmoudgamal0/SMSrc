@@ -47,7 +47,7 @@ public class CacheManager {
         return sharedPreferences.contains("username");
     }
 
-    public boolean isPinCached() { return sharedPreferences.contains("pin"); }
+    public boolean isPinCached() { return sharedPreferences.contains(getCachedUser() + "pin"); }
 
     private void putString(String key, String val){
         SharedPreferences.Editor editor = sharedPreferences.edit();
