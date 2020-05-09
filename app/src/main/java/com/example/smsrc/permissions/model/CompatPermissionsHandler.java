@@ -8,22 +8,28 @@ import android.content.pm.PackageManager;
 import com.example.smsrc.ResultCodes;
 import com.example.smsrc.permissions.interfaces.Handler;
 
+import java.util.ArrayList;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class ReadPhoneStateHandler implements Handler {
+public class CompatPermissionsHandler implements Handler {
 
     private PermissionChain chain;
     private Activity activity;
     private Context context;
-    private String permission;
+    private String[] permissions;
     private Handler nextHandler;
 
-    public ReadPhoneStateHandler(PermissionChain chain, Activity activity) {
+    public CompatPermissionsHandler(PermissionChain chain, Activity activity) {
         this.chain = chain;
         this.activity = activity;
         this.context = activity.getApplicationContext();
-        this.permission = Manifest.permission.READ_PHONE_STATE;
+        this.permissions = new String[]{
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
     }
 
     @Override
@@ -33,10 +39,15 @@ public class ReadPhoneStateHandler implements Handler {
 
     @Override
     public void handle() {
-        if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
+        ArrayList<String> requestedPermissions = new ArrayList<>();
+        for(String p: permissions){
+            if(ContextCompat.checkSelfPermission(context, p) != PackageManager.PERMISSION_GRANTED)
+                requestedPermissions.add(p);
+        }
+        if (requestedPermissions.size() == 0) {
             chain.next();
         } else {
-            ActivityCompat.requestPermissions(activity, new String[]{permission}, ResultCodes.REQUEST_READ_PHONE_STATE);
+            ActivityCompat.requestPermissions(activity, requestedPermissions.toArray(new String[0]), ResultCodes.REQUEST_READ_PHONE_STATE);
         }
     }
 

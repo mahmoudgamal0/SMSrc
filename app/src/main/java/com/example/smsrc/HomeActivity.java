@@ -11,8 +11,7 @@ import com.example.smsrc.permissions.interfaces.Handler;
 import com.example.smsrc.permissions.model.DeviceAdminHandler;
 import com.example.smsrc.permissions.model.NotificationManagerHandler;
 import com.example.smsrc.permissions.model.PermissionChain;
-import com.example.smsrc.permissions.model.ReadPhoneStateHandler;
-import com.example.smsrc.permissions.model.SendSMSHandler;
+import com.example.smsrc.permissions.model.CompatPermissionsHandler;
 import com.example.smsrc.users.dals.UserRepository;
 import com.example.smsrc.users.models.User;
 import com.google.android.material.navigation.NavigationView;
@@ -65,17 +64,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         initListeners();
 
-        // Getting permissions at run time
+        // Getting permissions at runtime
         permissionChain = new PermissionChain();
         Handler notificationManagerHandler = new NotificationManagerHandler(permissionChain, this);
         Handler deviceAdminHandler = new DeviceAdminHandler(permissionChain, this);
-        Handler readPhoneStateHandler = new ReadPhoneStateHandler(permissionChain, this);
-        Handler sendSMSHandler = new SendSMSHandler(permissionChain, this);
+        Handler readPhoneStateHandler = new CompatPermissionsHandler(permissionChain, this);
 
         permissionChain.setHandler(notificationManagerHandler);
         notificationManagerHandler.setNext(deviceAdminHandler);
         deviceAdminHandler.setNext(readPhoneStateHandler);
-        readPhoneStateHandler.setNext(sendSMSHandler);
 
         permissionChain.start();
 
