@@ -74,7 +74,7 @@ public class AuthTest {
         assertFalse(authorize.authorizeCommand(user1, CommandsContract.LOCK_PHONE));
         assertTrue(authorize.authorizeCommand(user, CommandsContract.PLAY_SOUND));
         assertTrue(authorize.authorizeCommand(user1, CommandsContract.PLAY_SOUND));
-        assertFalse(authorize.authorizeCommand(user2, CommandsContract.PLAY_SOUND));
+        assertTrue(authorize.authorizeCommand(user2, CommandsContract.PLAY_SOUND));
     }
 
     @Test
